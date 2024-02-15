@@ -1,4 +1,4 @@
-package Cashapp;
+package app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
-public class CashappApplication implements CommandLineRunner {
+public class CashAppApplication {
+
+	// private static final Logger log = LoggerFactory.getLogger(CashAppApplication.class);
+
 
 	@Autowired
   	JdbcTemplate jdbcTemplate;
 
 	public static void main(String[] args) {
-		SpringApplication.run(CashappApplication.class, args);
+		SpringApplication.run(CashAppApplication.class, args);
 	}
 
-	@Override
 	public void run(String... strings) throws Exception {
 
 		// Task task = new Task(categoryRepository.findById(1L).get(), "essai en cours");
@@ -45,7 +47,7 @@ public class CashappApplication implements CommandLineRunner {
 				"color VARCHAR(20) DEFAULT ''" +
 				");");
 		
-		log.info("TABLE products CREATED");
+		// log.info("TABLE products CREATED");
 		
 		jdbcTemplate.execute(
 			"CREATE TABLE clients (" +
@@ -56,7 +58,7 @@ public class CashappApplication implements CommandLineRunner {
 				"postcode INTEGER" +
 				");");
 
-		log.info("TABLE clients CREATED");
+		// log.info("TABLE clients CREATED");
 
 		jdbcTemplate.execute(
 			"CREATE TABLE orders (" +
