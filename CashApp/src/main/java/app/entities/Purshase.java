@@ -1,4 +1,4 @@
-package Cashapp.entities;
+package app.entities;
 
 public class Purshase {
     
