@@ -1,5 +1,5 @@
 package app.entities;
 
-public class Purshase {
+public class Purchase {
     
 }
