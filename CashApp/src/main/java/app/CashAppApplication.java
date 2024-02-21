@@ -48,7 +48,7 @@ public class CashAppApplication {
 				");");
 		
 		// log.info("TABLE products CREATED");
-		
+		jdbcTemplate.execute("DROP TABLE clients IF EXISTS");
 		jdbcTemplate.execute(
 			"CREATE TABLE clients (" +
 				"client_id IDENTITY PRIMARY KEY," +
@@ -60,16 +60,31 @@ public class CashAppApplication {
 
 		// log.info("TABLE clients CREATED");
 
+		jdbcTemplate.execute("DROP TABLE orders IF EXISTS");
 		jdbcTemplate.execute(
 			"CREATE TABLE orders (" +
 				"order_id IDENTITY PRIMARY KEY," +
-				"client_id INTEGER NOT NULL, " +
+				"client INTEGER NOT NULL, " +
 				"purchase_date DATETIME, " +
 				"total FLOAT, " +
 				"payment_method VARCHAR(20), " +
-				"FOREIGN KEY(client_id) REFERENCES clients(client_id)" +
+				"FOREIGN KEY(client) REFERENCES clients(client_id)" +
 				");");
+		
+		// log.info("TABLE clients CREATED");
+		jdbcTemplate.execute("DROP TABLE purchases IF EXISTS");
+		jdbcTemplate.execute(
+			"CREATE TABLE purchases (" +
+				"purchase_id IDENTITY PRIMARY KEY," +
+				"order INTEGER NOT NULL, " +
+				"product INTEGER NOT NULL, " +
+				"quantity INTEGER, " +
+				"unit_price FLOAT, " +
+				"FOREIGN KEY(order) REFERENCES orders(order_id)" +
+				"FOREIGN KEY(product) REFERENCES products(product_id)" +
+				");"); 
 
 		}
+
 	}
 }

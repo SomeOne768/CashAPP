@@ -2,21 +2,44 @@ package app.entities;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
+
+@Entity
+@Table(name="orders")
 public class Order{
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="order_id")
     private Long orderId;
-    private Long clientId;
+
+    @ManyToOne
+    @JoinColumn(name="client")
+    private Client client;
+
+    @Column(name="purchase_date")
     private Date purchaseDate;
+
+    @Column(name="total")
     private float total;
+
+    @Column(name="payment_method")
     private String paymentMethod;
 
-    public Order(Long clientId, Date purchaseDate, float total, String paymentMethod) {
-        this.clientId = clientId;
+    public Order(Client client, Date purchaseDate, float total, String paymentMethod) {
+        this.client = client;
         this.purchaseDate = purchaseDate;
         this.total = total;
         this.paymentMethod = paymentMethod;
     }
 
-   
     public Long getOrderId() {
         return orderId;
     }
@@ -25,12 +48,12 @@ public class Order{
         this.orderId = orderId;
     }
 
-    public Long getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Date getPurchaseDate() {
@@ -57,5 +80,3 @@ public class Order{
         this.paymentMethod = paymentMethod;
     }
 }
-
-

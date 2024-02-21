@@ -1,13 +1,35 @@
 package app.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+@Table(name="products")
 public class Product {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="product_id")
     private Long productId;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="brand")
     private String brand;
+
+    @Column(name="price")
     private float price;
+
+    @Column(name="color")
     private String color;
 
-    
+    protected Product() {}
+
     public Product(String name, String brand, float price, String color) {
         this.name = name;
         this.brand = brand;
