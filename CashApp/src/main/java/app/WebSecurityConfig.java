@@ -20,7 +20,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers(PathRequest.toH2Console()).permitAll() // Ici ajouter les routes avec connexion non nécéssaire
+                .requestMatchers(PathRequest.toH2Console(), "/login").permitAll() // Ici ajouter les routes avec connexion non nécéssaire
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form
