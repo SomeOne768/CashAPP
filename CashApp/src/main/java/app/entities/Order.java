@@ -1,5 +1,6 @@
 package app.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -13,11 +14,11 @@ import jakarta.persistence.Entity;
 
 @Entity
 @Table(name="orders")
-public class Order{
+public class Order implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="order_id")
+    @Column(name="orders_id")
     private Long orderId;
 
     @ManyToOne
@@ -28,17 +29,19 @@ public class Order{
     private Date purchaseDate;
 
     @Column(name="total")
-    private float total;
+    private Double total;
 
     @Column(name="payment_method")
     private String paymentMethod;
 
-    public Order(Client client, Date purchaseDate, float total, String paymentMethod) {
+    public Order(Client client, Date purchaseDate, Double total, String paymentMethod) {
         this.client = client;
         this.purchaseDate = purchaseDate;
         this.total = total;
         this.paymentMethod = paymentMethod;
     }
+
+    public Order() {}
 
     public Long getOrderId() {
         return orderId;
@@ -64,11 +67,11 @@ public class Order{
         this.purchaseDate = purchaseDate;
     }
 
-    public float getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 

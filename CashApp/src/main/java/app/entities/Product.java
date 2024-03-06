@@ -2,6 +2,9 @@ package app.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,7 +12,7 @@ import jakarta.persistence.Id;
 
 @Entity
 @Table(name="products")
-public class Product {
+public class Product implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
