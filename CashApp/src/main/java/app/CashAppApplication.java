@@ -13,14 +13,20 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// import app.repositories.UserRepository;
+// import app.entities.User;
+
 @SpringBootApplication
 public class CashAppApplication {
 
-	// private static final Logger log = LoggerFactory.getLogger(CashAppApplication.class);
-
+	// private static final Logger log =
+	// LoggerFactory.getLogger(CashAppApplication.class);
 
 	@Autowired
-  	JdbcTemplate jdbcTemplate;
+	JdbcTemplate jdbcTemplate;
+
+	// @Autowired
+	// UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CashAppApplication.class, args);
@@ -28,48 +34,58 @@ public class CashAppApplication {
 
 	public void run(String... strings) throws Exception {
 
-		// Task task = new Task(categoryRepository.findById(1L).get(), "essai en cours");
+		// Task task = new Task(categoryRepository.findById(1L).get(), "essai en
+		// cours");
 		// taskRepository.save(task);
 
 		List<String> list = Arrays.asList(strings);
 		if (list.contains("install")) {
 
+			// A corriger car probleme lors de la creation des tables
 
-		// A corriger car probleme lors de la creation des tables
+			jdbcTemplate.execute("DROP TABLE products IF EXISTS");
+			jdbcTemplate.execute(
+					"CREATE TABLE products (" +
+							"product_id IDENTITY PRIMARY KEY," +
+							"name VARCHAR(50) DEFAULT '', " +
+							"brand VARCHAR(20) DEFAULT '', " +
+							"price FLOAT, " +
+							"color VARCHAR(20) DEFAULT ''" +
+							");");
 
-		jdbcTemplate.execute("DROP TABLE products IF EXISTS");
-		jdbcTemplate.execute(
-			"CREATE TABLE products (" +
-				"product_id IDENTITY PRIMARY KEY," +
-				"name VARCHAR(50) DEFAULT '', " +
-				"brand VARCHAR(20) DEFAULT '', " +
-				"price FLOAT, " +
-				"color VARCHAR(20) DEFAULT ''" +
-				");");
-		
-		// log.info("TABLE products CREATED");
-		
-		jdbcTemplate.execute(
-			"CREATE TABLE clients (" +
-				"client_id IDENTITY PRIMARY KEY," +
-				"firstname VARCHAR(50) DEFAULT '', " +
-				"lastname VARCHAR(20) DEFAULT '', " +
-				"birthdate DATE, " +
-				"postcode INTEGER" +
-				");");
+			// log.info("TABLE products CREATED");
 
-		// log.info("TABLE clients CREATED");
+			jdbcTemplate.execute(
+					"CREATE TABLE clients (" +
+							"client_id IDENTITY PRIMARY KEY," +
+							"firstname VARCHAR(50) DEFAULT '', " +
+							"lastname VARCHAR(20) DEFAULT '', " +
+							"birthdate DATE, " +
+							"postcode INTEGER" +
+							");");
 
-		jdbcTemplate.execute(
-			"CREATE TABLE orders (" +
-				"order_id IDENTITY PRIMARY KEY," +
-				"client_id INTEGER NOT NULL, " +
-				"purchase_date DATETIME, " +
-				"total FLOAT, " +
-				"payment_method VARCHAR(20), " +
-				"FOREIGN KEY(client_id) REFERENCES clients(client_id)" +
-				");");
+			// log.info("TABLE clients CREATED");
 
+			jdbcTemplate.execute(
+					"CREATE TABLE orders (" +
+							"order_id IDENTITY PRIMARY KEY," +
+							"client_id INTEGER NOT NULL, " +
+							"purchase_date DATETIME, " +
+							"total FLOAT, " +
+							"payment_method VARCHAR(20), " +
+							"FOREIGN KEY(client_id) REFERENCES clients(client_id)" +
+							");");
+
+			// jdbcTemplate.execute(
+			// 		"CREATE TABLE users (" +
+			// 				"id IDENTITY PRIMARY KEY," +
+			// 				"username VARCHAR(20)," +
+			// 				"password VARCHAR(20)" +
+			// 				");");
+
+			// User user = new User("TheBoss", "TheBoss");
+
+			// userRepository.save(user);
 		}
 	}
 }

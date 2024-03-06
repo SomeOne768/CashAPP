@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+// import org.springframework.security.web.util.matcher.PathRequest;
+
 
 @Configuration
 @EnableWebSecurity
@@ -18,7 +20,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/SecurePath1","/SecurePath2").permitAll()
+                .requestMatchers(PathRequest.toH2Console()).permitAll() // Ici ajouter les routes avec connexion non nécéssaire
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form
