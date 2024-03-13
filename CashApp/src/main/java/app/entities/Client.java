@@ -36,7 +36,6 @@ public class Client{
         this.birthdate = birthdate;
         this.postcode = postcode;
     }
-
     
     public Long getClientId() {
         return clientId;

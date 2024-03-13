@@ -22,19 +22,23 @@ public class Product implements Serializable{
     @Column(name="name")
     private String name;
 
+    @Column(name="imageUrl")
+    private String imageUrl;
+
     @Column(name="brand")
     private String brand;
 
     @Column(name="price")
-    private float price;
+    private double price;
 
     @Column(name="color")
     private String color;
 
     protected Product() {}
 
-    public Product(String name, String brand, float price, String color) {
+    public Product(String name, String imageUrl, String brand, double price, String color) {
         this.name = name;
+        this.imageUrl = imageUrl;
         this.brand = brand;
         this.price = price;
         this.color = color;
@@ -65,11 +69,11 @@ public class Product implements Serializable{
         this.brand = brand;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

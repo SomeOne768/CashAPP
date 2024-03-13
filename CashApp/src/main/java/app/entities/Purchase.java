@@ -27,14 +27,14 @@ public class Purchase {
     private Product product;
 
     @Column(name="quantity")
-    private Integer quantity;
+    private int quantity;
 
     @Column(name="unit_price")
-    private Float unit_price;
+    private double unit_price;
 
     protected Purchase() {}
 
-    public Purchase(Order order, Product product, Integer quantity, float unit_price) {
+    public Purchase(Order order, Product product, int quantity, double unit_price) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
@@ -57,19 +57,19 @@ public class Purchase {
         this.product = productToSet;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantityToSet) {
+    public void setQuantity(int quantityToSet) {
         this.quantity = quantityToSet;
     }
 
-    public float getUnitPrice() {
+    public double getUnitPrice() {
         return unit_price;
     }
 
-    public void setUnitPrice(float UnitPriceToSet) {
+    public void setUnitPrice(double UnitPriceToSet) {
         this.unit_price = UnitPriceToSet;
     }
 

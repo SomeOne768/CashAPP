@@ -29,12 +29,12 @@ public class Order implements Serializable{
     private Date purchaseDate;
 
     @Column(name="total")
-    private Double total;
+    private double total;
 
     @Column(name="payment_method")
     private String paymentMethod;
 
-    public Order(Client client, Date purchaseDate, Double total, String paymentMethod) {
+    public Order(Client client, Date purchaseDate, double total, String paymentMethod) {
         this.client = client;
         this.purchaseDate = purchaseDate;
         this.total = total;
@@ -67,11 +67,11 @@ public class Order implements Serializable{
         this.purchaseDate = purchaseDate;
     }
 
-    public Double getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
