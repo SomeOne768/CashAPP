@@ -46,8 +46,6 @@ public class CashAppApplication {
 	public void run(String... strings) throws Exception {
 
 		// Order order = new Order(orderRepository.findById(1L).get(), "essai en cours");
-
-		
 		
 
 		List<String> list = Arrays.asList(strings);
