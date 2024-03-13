@@ -1,22 +1,48 @@
 package app.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order{
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
+
+@Entity
+@Table(name="orders")
+public class Order implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="orders_id")
     private Long orderId;
-    private Long clientId;
+
+    @ManyToOne
+    @JoinColumn(name="client")
+    private Client client;
+
+    @Column(name="purchase_date")
     private Date purchaseDate;
-    private float total;
+
+    @Column(name="total")
+    private double total;
+
+    @Column(name="payment_method")
     private String paymentMethod;
 
-    public Order(Long clientId, Date purchaseDate, float total, String paymentMethod) {
-        this.clientId = clientId;
+    public Order(Client client, Date purchaseDate, double total, String paymentMethod) {
+        this.client = client;
         this.purchaseDate = purchaseDate;
         this.total = total;
         this.paymentMethod = paymentMethod;
     }
 
-   
+    public Order() {}
+
     public Long getOrderId() {
         return orderId;
     }
@@ -25,12 +51,12 @@ public class Order{
         this.orderId = orderId;
     }
 
-    public Long getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Date getPurchaseDate() {
@@ -41,11 +67,11 @@ public class Order{
         this.purchaseDate = purchaseDate;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
@@ -57,5 +83,3 @@ public class Order{
         this.paymentMethod = paymentMethod;
     }
 }
-
-

@@ -1,15 +1,44 @@
 package app.entities;
 
-public class Product {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+@Table(name="products")
+public class Product implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="product_id")
     private Long productId;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="imageUrl")
+    private String imageUrl;
+
+    @Column(name="brand")
     private String brand;
-    private float price;
+
+    @Column(name="price")
+    private double price;
+
+    @Column(name="color")
     private String color;
 
-    
-    public Product(String name, String brand, float price, String color) {
+    protected Product() {}
+
+    public Product(String name, String imageUrl, String brand, double price, String color) {
         this.name = name;
+        this.imageUrl = imageUrl;
         this.brand = brand;
         this.price = price;
         this.color = color;
@@ -40,11 +69,11 @@ public class Product {
         this.brand = brand;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
