@@ -19,8 +19,8 @@ public class Purchase {
     private Long purchaseId;
 
     //@ManyToOne
-    @JoinColumn(name="order")
-    private Order order;
+    @JoinColumn(name="order_")
+    private Order order_;
 
     //@ManyToOne
     @JoinColumn(name="product")
@@ -35,18 +35,18 @@ public class Purchase {
     protected Purchase() {}
 
     public Purchase(Order order, Product product, int quantity, double unit_price) {
-        this.order = order;
+        this.order_ = order;
         this.product = product;
         this.quantity = quantity;
         this.unit_price = unit_price;
     }
 
     public Order getOrder() {
-        return order;
+        return order_;
     }
 
     public void setOrder(Order orderToSet) {
-        this.order = orderToSet;
+        this.order_ = orderToSet;
     }
 
     public Product getProduct() {
