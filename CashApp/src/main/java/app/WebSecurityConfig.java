@@ -20,7 +20,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers(PathRequest.toH2Console(), "/login").permitAll() // Ici ajouter les routes avec connexion non nécéssaire
+                .requestMatchers("/", "/login").permitAll() // Ici ajouter les routes avec connexion non nécéssaire
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form
@@ -35,8 +35,7 @@ public class WebSecurityConfig {
     // Si vous décommentez ce code, l'utilisateur qui peut se connecter est celui qui est spécifié
     // cela désactive l'utilisateur du fichier properties
     // ne pas décommenter pour utiliser une base
-    /*
-    @Bean
+    /*@Bean
     public UserDetailsService userDetailsService() {
         UserDetails user =
              User.withDefaultPasswordEncoder()
@@ -46,7 +45,7 @@ public class WebSecurityConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(user);
-    }
-    */
+    }*/
+    
 }
 
