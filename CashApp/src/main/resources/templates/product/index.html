@@ -66,6 +66,8 @@
         <a th:href="'/shop/edit/' + ${product.productId}" class="btn btn-primary btn-block" th:text="${@myUserDetailsService.isAdmin() ? 'Modifier' : 'Retour'}"></a>
 
     </div>
+
+    <div th:replace="fragments/logout-button.html"></div>
 </body>
 
 </html>
