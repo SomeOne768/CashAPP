@@ -29,6 +29,7 @@ public class ShopController {
     @Autowired
     private ProductRepository productRepository;
 
+    // Permet de voir tous les produits disponible à l'achat
     @GetMapping(path = { "/shop" })
     public String index(Model model) {
 
@@ -36,6 +37,7 @@ public class ShopController {
         return "shop";
     }
 
+    // Voir les détails d'un produit
     @GetMapping(path = { "/shop/{id}" })
     public String findProduct(@PathVariable Long id, Model model) {
         Optional<Product> productOptional = productRepository.findById(id);
@@ -47,6 +49,7 @@ public class ShopController {
         return "product/index";
     }
 
+    // Editer un produit
     @GetMapping(path = { "/shop/edit/{id}" })
     public String editProduct(@PathVariable Long id, Model model) {
         Optional<Product> productOptional = productRepository.findById(id);
@@ -58,7 +61,8 @@ public class ShopController {
         return "product/edit";
     }
 
-    @PostMapping("/product/edit/{id}")
+    // Enregistrer les modif d'un produit
+    @PostMapping("/shop/edit/{id}")
     public String updateProduct(@PathVariable("id") Long productId, @RequestParam String name,
             @RequestParam String brand, @RequestParam Double price,
             @RequestParam String color) {
@@ -76,15 +80,17 @@ public class ShopController {
 
         productRepository.save(product);
 
-        return "redirect:/shop/" + productId;
+        return "redirect:/shop";
     }
 
+    // Page pour créer un produit
     @GetMapping(path = { "/shop/new" })
     public String createProduct(Model model) {
         model.addAttribute("product", new Product());
         return "product/new";
     }
 
+    // Page pour enregistrer le produit créer avec son image associée
     @PostMapping("/shop/new")
     public String create(@ModelAttribute Product product, @RequestParam("image") MultipartFile file) {
 
