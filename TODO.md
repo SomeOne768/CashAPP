@@ -6,3 +6,4 @@
 - payer / enregistrer un achat
 - logout à ajouter de partout
 - visualiser détails après clique sur "/"
+- page panier en mode edit / suppr / update
