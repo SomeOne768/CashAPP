@@ -57,7 +57,7 @@
 
 <body>
 
-    <form th:action="@{'/product/edit/' + ${product.productId}}" method="post">
+    <form th:action="@{'/shop/edit/' + ${product.productId}}" method="post">
         <input type="text" name="name" th:value="${product.name}" />
         <input type="text" name="brand" th:value="${product.brand}" />
         <input type="text" name="price" th:value="${product.price}" />
