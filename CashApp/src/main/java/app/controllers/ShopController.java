@@ -90,7 +90,7 @@ public class ShopController {
         return "product/new";
     }
 
-    // Page pour enregistrer le produit créer avec son image associée
+    // Route pour enregistrer le produit créer avec son image associée
     @PostMapping("/shop/new")
     public String create(@ModelAttribute Product product, @RequestParam("image") MultipartFile file) {
 
