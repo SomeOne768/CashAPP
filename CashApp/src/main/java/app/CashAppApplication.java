@@ -1,91 +1,61 @@
 package app;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
-
+import app.entities.*;
+import app.repositories.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 // import app.repositories.UserRepository;
 // import app.entities.User;
 
 @SpringBootApplication
-public class CashAppApplication {
+public class CashAppApplication implements CommandLineRunner {
 
-	// private static final Logger log =
-	// LoggerFactory.getLogger(CashAppApplication.class);
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+    private static final Logger log = LoggerFactory.getLogger(
+            CashAppApplication.class);
+  
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
-	// @Autowired
-	// UserRepository userRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(CashAppApplication.class, args);
-	}
 
-	public void run(String... strings) throws Exception {
+    @Autowired
+    private ClientRepository clientRepository;
 
-		// Task task = new Task(categoryRepository.findById(1L).get(), "essai en
-		// cours");
-		// taskRepository.save(task);
+    @Autowired
+    private OrderRepository orderRepository;
 
-		List<String> list = Arrays.asList(strings);
-		if (list.contains("install")) {
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
-			// A corriger car probleme lors de la creation des tables
+    public static void main(String[] args) {
+        SpringApplication.run(CashAppApplication.class, args);
+    }
 
-			jdbcTemplate.execute("DROP TABLE products IF EXISTS");
-			jdbcTemplate.execute(
-					"CREATE TABLE products (" +
-							"product_id IDENTITY PRIMARY KEY," +
-							"name VARCHAR(50) DEFAULT '', " +
-							"brand VARCHAR(20) DEFAULT '', " +
-							"price FLOAT, " +
-							"color VARCHAR(20) DEFAULT ''" +
-							");");
+    @Override
+    public void run(String... strings) throws Exception {
+        List<String> list = Arrays.asList(strings);
 
-			// log.info("TABLE products CREATED");
+        if (list.contains("install")) {
+            productRepository.save(
+                    new Product("Chemise", "chemise.jpeg", "Abidas", 10.32, "Noir"));
+            productRepository.save(
+                    new Product("fraise", "fraise.jpeg", "FiTounis", 4.14, "Rouge"));
+            productRepository.save(
+                    new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, "Noir"));
+            productRepository.save(
+                    new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
+        }
+    }
 
-			jdbcTemplate.execute(
-					"CREATE TABLE clients (" +
-							"client_id IDENTITY PRIMARY KEY," +
-							"firstname VARCHAR(50) DEFAULT '', " +
-							"lastname VARCHAR(20) DEFAULT '', " +
-							"birthdate DATE, " +
-							"postcode INTEGER" +
-							");");
-
-			// log.info("TABLE clients CREATED");
-
-			jdbcTemplate.execute(
-					"CREATE TABLE orders (" +
-							"order_id IDENTITY PRIMARY KEY," +
-							"client_id INTEGER NOT NULL, " +
-							"purchase_date DATETIME, " +
-							"total FLOAT, " +
-							"payment_method VARCHAR(20), " +
-							"FOREIGN KEY(client_id) REFERENCES clients(client_id)" +
-							");");
-
-			// jdbcTemplate.execute(
-			// 		"CREATE TABLE users (" +
-			// 				"id IDENTITY PRIMARY KEY," +
-			// 				"username VARCHAR(20)," +
-			// 				"password VARCHAR(20)" +
-			// 				");");
-
-			// User user = new User("TheBoss", "TheBoss");
-
-			// userRepository.save(user);
-		}
-	}
 }

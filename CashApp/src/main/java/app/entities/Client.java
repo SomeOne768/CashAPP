@@ -2,13 +2,33 @@ package app.entities;
 
 import java.util.Date;
 
-public class Client{
-    private Long clientId;
-    private String firstname;
-    private String lastname;
-    private Date birthdate;
-    private int postcode;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
 
+@Entity
+@Table(name="clients")
+public class Client{
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="client_id")
+    private Long clientId;
+
+    @Column(name="firstname")
+    private String firstname;
+
+    @Column(name="lastname")
+    private String lastname;
+
+    @Column(name="birthdate")
+    private Date birthdate;
+
+    @Column(name="postcode")
+    private int postcode;
     
     public Client(String firstname, String lastname, Date birthdate, int postcode) {
         this.firstname = firstname;
@@ -16,7 +36,6 @@ public class Client{
         this.birthdate = birthdate;
         this.postcode = postcode;
     }
-
     
     public Long getClientId() {
         return clientId;
