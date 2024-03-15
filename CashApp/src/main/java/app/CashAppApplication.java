@@ -53,6 +53,7 @@ public class CashAppApplication implements CommandLineRunner {
             productRepository.save(new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, "Noir"));
             productRepository.save(new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
             userRepository.save(new User("admin", "admin"));
+            userRepository.save(new User("user", "user"));
         }
     }
 
