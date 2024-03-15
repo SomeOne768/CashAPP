@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +16,12 @@ import org.springframework.http.ResponseEntity;
 import app.repositories.ProductRepository;
 import app.entities.Product;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.*;
+
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 @Controller
 public class ShopController {
@@ -80,7 +86,19 @@ public class ShopController {
     }
 
     @PostMapping("/shop/new")
-    public String create(@ModelAttribute Product product) {
+    public String create(@ModelAttribute Product product, @RequestParam("image") MultipartFile file) {
+
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get("src/main/resources/static/images/" + product.getImageUrl());
+                
+                Files.write(path, bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         productRepository.save(product);
         return "redirect:/shop";
     }

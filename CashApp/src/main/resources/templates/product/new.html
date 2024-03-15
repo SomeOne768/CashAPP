@@ -58,7 +58,7 @@
 <body>
 
     <h1>Créer un nouveau produit</h1>
-    <form action="/shop/new" method="post">
+    <form action="/shop/new" method="post" enctype="multipart/form-data">
         <label for="name">Nom du produit:</label>
         <input type="text" id="name" name="name" required><br><br>
         
@@ -74,8 +74,8 @@
         <label for="imageUrl">Image name:</label>
         <input type="text" id="imageUrl" name="imageUrl" required><br><br>
 
-        <!-- <label for="image">Image:</label>
-        <input type="file" id="image" name="image" accept="image/*" required><br><br> -->
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required><br><br>
         
         
         <button type="submit">Créer</button>
