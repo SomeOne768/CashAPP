@@ -12,6 +12,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import app.repositories.UserRepository;
+import app.entities.User;
+
 @SpringBootApplication
 public class CashAppApplication implements CommandLineRunner {
 
@@ -33,6 +36,9 @@ public class CashAppApplication implements CommandLineRunner {
     @Autowired
     private PurchaseRepository purchaseRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(CashAppApplication.class, args);
     }
@@ -42,14 +48,13 @@ public class CashAppApplication implements CommandLineRunner {
         List<String> list = Arrays.asList(strings);
 
         if (list.contains("install")) {
-            productRepository.save(
-                    new Product("Chemise", "chemise.jpeg", "Abidas", 10.32, "Noir"));
-            productRepository.save(
-                    new Product("fraise", "fraise.jpeg", "FiTounis", 4.14, "Rouge"));
-            productRepository.save(
-                    new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, "Noir"));
-            productRepository.save(
-                    new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
+            productRepository.save(new Product("Chemise", "chemise.jpeg", "Abidas", 10.32, "Noir"));
+            productRepository.save(new Product("fraise", "fraise.jpeg", "FiTounis", 4.14, "Rouge"));
+            productRepository.save(new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, "Noir"));
+            productRepository.save(new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
+            userRepository.save(new User("admin", "admin"));
+            userRepository.save(new User("user", "user"));
         }
     }
+
 }

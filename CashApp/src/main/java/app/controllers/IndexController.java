@@ -18,5 +18,11 @@ public class IndexController {
 
     return "index"; 
   }
+
+  @GetMapping(path={"/secu"})
+  public String secu() {
+
+    return "secu.html"; 
+  }
 }
 
