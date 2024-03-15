@@ -12,17 +12,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+// import app.repositories.UserRepository;
+// import app.entities.User;
+
 @SpringBootApplication
 public class CashAppApplication implements CommandLineRunner {
 
+
     private static final Logger log = LoggerFactory.getLogger(
             CashAppApplication.class);
-
+  
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Autowired
     private ProductRepository productRepository;
+
 
     @Autowired
     private ClientRepository clientRepository;
@@ -52,4 +57,5 @@ public class CashAppApplication implements CommandLineRunner {
                     new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
         }
     }
+
 }
