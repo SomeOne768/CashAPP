@@ -45,7 +45,7 @@
             <div th:each="p : ${products}" class="col-md-3">
                 <form th:action="'/shop/' + ${p.productId}" method="get">
                     <div class="card d-flex flex-column h-100">
-                        <img th:src="'../images/' + ${p.imageUrl}" class="flex-fill" />
+                        <img th:src="'/images/' + ${p.imageUrl}" class="flex-fill" />
                         <div class="flex-fill">
                             <p th:text="${p.name}" class="mb-0"></p>
                             <button type="submit" class="btn btn-primary btn-block mt-auto">Détail</button>

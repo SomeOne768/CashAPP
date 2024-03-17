@@ -7,22 +7,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import app.repositories.ProductRepository;
+
 import org.springframework.ui.Model;
 
-@Controller    
+@Controller
 public class IndexController {
 
+  @Autowired
+  private ProductRepository productRepository;
 
   @GetMapping(path={"/"})
-  public String index() {
-
+  public String index(Model model) {
+    model.addAttribute("searchedProducts", productRepository.findAll());
     return "index"; 
   }
 
-  @GetMapping(path={"/secu"})
+  @GetMapping(path = { "/secu" })
   public String secu() {
 
-    return "secu.html"; 
+    return "secu.html";
   }
 }
-
