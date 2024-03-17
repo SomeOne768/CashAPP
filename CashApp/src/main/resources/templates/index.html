@@ -6,121 +6,137 @@
     <title>Logiciel de Caisse</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    body {
-    margin: 0;
-    padding: 20px;
-    background-color: #f0f4f3;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    }
-   
-    .actions, .payment-actions {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
-    display: flex;
-    gap: 15px;
-    }
-   
-    .btn-custom {
-    background-color: #28a745;
-    color: #ffffff;
-    border: 0;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    flex: 1;
-    }
-   
-    .btn-custom:hover {
-    background-color: #218838;
-    }
-   
-    .card, .product-details, .selected-products {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    }
-   
-    .list-group-item {
-    border: 0;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    transition: transform 0.2s ease;
-    }
-   
-    .list-group-item:hover {
-    transform: scale(1.02);
-    background-color: #e9f5ee;
-    }
-   
-    .form-control {
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    transition: border-color 0.2s ease-in-out;
-    }
-   
-    .form-control:focus {
-    border-color: #28a745;
-    box-shadow: none;
-    }
-   
-    h4 {
-    margin-bottom: 20px;
-    color: #28a745;
-    font-weight: 600;
-    }
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f4f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .actions,
+        .payment-actions {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-custom {
+            background-color: #28a745;
+            color: #ffffff;
+            border: 0;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            flex: 1;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+
+        .card,
+        .product-details,
+        .selected-products {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .list-group-item {
+            border: 0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .list-group-item:hover {
+            transform: scale(1.02);
+            background-color: #e9f5ee;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: none;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+            color: #28a745;
+            font-weight: 600;
+        }
     </style>
-   </head>
-   <body>
+</head>
+
+<body>
     <div class="container-fluid">
-    <div class="row">
-    <div class="col-12">
-    <div class="actions">
-    <button class="btn btn-custom">Chercher un produit</button>
-    <button class="btn btn-custom">Retourner un article</button>
-    </div>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col-md-3">
-    <div class="product-list">
-    <h4>Liste des produits</h4>
-    <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un produit...">
-    <div id="productsContainer" class="list-group">
-    <!-- La liste filtrée des produits s'affiche ici -->
-    </div>
-    </div>
-    </div>
-    <div class="col-md-6">
-    <div class="product-details">
-    <h4>Détail du produit</h4>
-    <!-- Les détails du produit sélectionné s'afficheront ici -->
-    </div>
-    </div>
-    <div class="col-md-3">
-    <div class="selected-products">
-    <h4>Articles sélectionnés</h4>
-    <ul id="selectedItems" class="list-group">
-    <!-- Les articles sélectionnés s'affichent ici -->
-    </ul>
-    </div>
-    <div class="payment-actions">
-    <button class="btn btn-custom btn-block">Payer</button>
-    <button class="btn btn-custom btn-block">Imprimer le ticket</button>
-    </div>
-    </div>
-    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="actions">
+                    <button class="btn btn-custom">Chercher un produit</button>
+                    <button class="btn btn-custom">Retourner un article</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="product-list">
+                    <h4>Liste des produits</h4>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un produit...">
+                    <div id="productsContainer" class="list-group">
+                        <!-- Pour le moment, pour simuler on les recuepre au chargemernt de la page -->
+                        <div th:each="p : ${searchedProducts}">
+                            <div class="card d-flex flex-column h-100">
+                                <img th:src="'images/' + ${p.imageUrl}" />
+                                <div>
+                                    <p th:text="${p.name}" class="mb-0"></p>
+                                    <button type="submit" class="btn btn-primary btn-block mt-auto">Détail</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="product-details">
+                    <h4>Détail du produit</h4>
+                    <!-- Les détails du produit sélectionné s'afficheront ici -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="selected-products">
+                    <h4>Articles sélectionnés</h4>
+                    <ul id="selectedItems" class="list-group">
+                        <!-- Les articles sélectionnés s'affichent ici -->
+                    </ul>
+                </div>
+                <div class="payment-actions">
+                    <button class="btn btn-custom btn-block">Payer</button>
+                    <button class="btn btn-custom btn-block">Imprimer le ticket</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div th:replace="fragments/logout-button.html"></div>
-   </body>
-   </html>
+    
+
+</body>
+
+</html>
