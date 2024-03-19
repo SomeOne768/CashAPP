@@ -44,14 +44,14 @@ public class CashAppApplication implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         List<String> list = Arrays.asList(strings);
 
-        if (list.contains("install")) {
-            productRepository.save(new Product("Chemise", "chemise.jpeg", "Abidas", 10.32, "Noir"));
-            productRepository.save(new Product("fraise", "fraise.jpeg", "FiTounis", 4.14, "Rouge"));
-            productRepository.save(new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, "Noir"));
-            productRepository.save(new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
-            userRepository.save(new User("admin", "admin"));
-            userRepository.save(new User("user", "user"));
-        }
+        // if (list.contains("install")) {
+        //     productRepository.save(new Product("Chemise", "chemise.jpeg", "Abidas", 10.32, "Noir"));
+        //     productRepository.save(new Product("fraise", "fraise.jpeg", "FiTounis", 4.14, "Rouge"));
+        //     productRepository.save(new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, "Noir"));
+        //     productRepository.save(new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
+        //     userRepository.save(new User("admin", "admin"));
+        //     userRepository.save(new User("user", "user"));
+        // }
     }
 
 }

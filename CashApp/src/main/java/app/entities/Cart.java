@@ -1,7 +1,9 @@
 package app.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
+
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -23,16 +25,16 @@ public class Cart {
     @Column(name = "cart_id")
     private Long cartId;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CartItem> items;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
 
 
     public List<CartItem> getItems() {
-        return items;
+        return cartItems;
     }
 
     public void setItems(List<CartItem> items) {
-        this.items = items;
+        this.cartItems = items;
     }
 
 }

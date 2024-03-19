@@ -10,20 +10,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-@Table(name="purchases")
+@Table(name="orderItems")
 public class OrderItem {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="orderItem_id")
     private Long orderItemId;
 
     //@ManyToOne
-    @JoinColumn(name="order_")
+    @JoinColumn(name="order_id")
     private Order order_;
 
-    //@ManyToOne
-    @JoinColumn(name="productName")
+    @Column(name="productName")
     private String productName;
 
     @Column(name="quantity")
@@ -49,11 +48,11 @@ public class OrderItem {
         this.order_ = orderToSet;
     }
 
-    public String getProduct() {
+    public String getProductName() {
         return productName;
     }
 
-    public void setProduct(String productName) {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 

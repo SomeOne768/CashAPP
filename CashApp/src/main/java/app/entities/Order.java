@@ -1,7 +1,7 @@
 package app.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -9,8 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name="orders")
@@ -18,7 +20,7 @@ public class Order implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="orders_id")
+    @Column(name="order_id")
     private Long orderId;
 
     @ManyToOne
@@ -34,9 +36,23 @@ public class Order implements Serializable{
     @Column(name="payment_method")
     private String paymentMethod;
 
-    //@OneToMany
-    @JoinColumn(name="OrderItem")
-    private OrderItem items;
+    @OneToMany(mappedBy = "order_", cascade = CascadeType.ALL)
+    private List<OrderItem> items;
+
+    public List<OrderItem> getItems()
+    {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items)
+    {
+        this.items = items;
+    }
+
+    public void addItems(OrderItem item)
+    {
+        this.items.add(item);
+    }
 
     public Order(Client client, Date purchaseDate, double total, String paymentMethod) {
         this.client = client;

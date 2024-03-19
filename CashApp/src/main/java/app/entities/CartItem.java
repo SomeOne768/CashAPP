@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 
 @Entity
-@Table(name="cart_item")
+@Table(name="cartItems")
 public class CartItem implements Serializable{
 
     @Id
