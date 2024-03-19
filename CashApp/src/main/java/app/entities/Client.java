@@ -46,6 +46,11 @@ public class Client{
         return this.cart;
     }
 
+    public Client()
+    {
+
+    }
+    
     public Client(String firstname, String lastname, Date birthdate, int postcode) {
         this.firstname = firstname;
         this.lastname = lastname;
