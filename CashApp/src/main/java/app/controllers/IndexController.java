@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,42 +14,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import app.entities.Product;
 import app.repositories.ProductRepository;
 import app.services.ProductService;
-
+import app.services.ClientService;
 import org.springframework.ui.Model;
 
 @Controller
 public class IndexController {
 
-  @Autowired
-  private ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
-   @Autowired
-    private ProductService productService;
+	@Autowired
+	private ProductService productService;
 
-  @GetMapping(path={"/"})
-  public String index(Model model) {
-    model.addAttribute("searchedProducts", productRepository.findAll());
-    return "index"; 
-  }
+	@Autowired
+	private ClientService clientService;
 
-  // Permet de voir tous les produits disponible à l'achat
-  @GetMapping(path = { "/index/GetProducts/" })
-  public String findProduct(@RequestParam(name = "query", required = false) String query, Model model) {
-    ArrayList<Product> products = productService.findProductsByName(query);
-      System.out.println("\n\n\n AAAA \n\n\n");
+	@GetMapping("/")
+	public String index(@RequestParam(required = false, defaultValue = "user") String username, @RequestParam(required = false, defaultValue = "") String productName, Model model) {
 
-      for (Product product : products) {
-        System.out.println(product.getImageUrl() + "\n");
-      }
-      
+        model.addAttribute("client", clientService.findByFirstname(username));
+		model.addAttribute("searchedProducts", productService.findProductsByName(productName));
+        return "index"; // Nom de la vue Thymeleaf à afficher
+    }
 
-      model.addAttribute("searchedProducts", products);
-      return "index";
-  }
+	@GetMapping(path = { "/secu" })
+	public String secu() {
 
-  @GetMapping(path = { "/secu" })
-  public String secu() {
-
-    return "secu.html";
-  }
+		return "secu.html";
+	}
 }

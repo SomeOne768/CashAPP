@@ -99,8 +99,8 @@
                 <div class="product-list">
                     <h4>Liste des produits</h4>
 
-                    <form th:action="@{/index/GetProducts/}" method="get">
-                        <input type="text" id="searchInput" name="query" class="form-control" placeholder="Rechercher un produit...">
+                    <form th:action="@{/}" method="get">
+                        <input type="text" id="searchInput" name="productName" class="form-control" placeholder="Rechercher un produit...">
                         <button type="submit">Rechercher</button>
                     </form>
 
