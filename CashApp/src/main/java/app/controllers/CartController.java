@@ -22,7 +22,5 @@ import java.nio.file.Files;
 @Controller
 public class CartController {
 
-    @Autowired
-    
 
 }
