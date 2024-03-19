@@ -20,7 +20,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/login").permitAll() // Ici ajouter les routes avec connexion non nécéssaire
+                .requestMatchers("/login").permitAll() // Ici ajouter les routes avec connexion non nécéssaire
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form

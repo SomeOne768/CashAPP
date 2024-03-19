@@ -61,6 +61,9 @@
                     </div>
             </div>
         </div>
+        <div th:if="${cart.getItems() == null}" class="col-12">
+            <p class="text-center mb-4">Panier vide</p>
+        </div>
     </div>
 </body>
 
