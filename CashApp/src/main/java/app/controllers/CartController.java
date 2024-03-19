@@ -33,12 +33,6 @@ public class CartController {
     @GetMapping(path = { "/cart" })
     public String index(Model model)
     {
-        Cart cart = cartService.getCart();
-        Iterable<Product> I = productRepository.findAll();
-        for(Product p : I)
-        {
-            cartService.addToCart(cart, p, 1);
-        }
         model.addAttribute("cart", cartService.getCart());
         return "cart/index";
     }
