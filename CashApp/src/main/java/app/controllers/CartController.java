@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.http.ResponseEntity;
 
 import app.repositories.ProductRepository;
+import app.services.CartService;
 import app.services.MyUserDetailsService;
 import app.services.ProductService;
 import app.entities.Product;
@@ -22,5 +23,14 @@ import java.nio.file.Files;
 @Controller
 public class CartController {
 
+    @Autowired
+    CartService cartService;
+
+    @GetMapping(path = { "/cart" })
+    public String index(Model model)
+    {
+        model.addAttribute("cart", cartService.getCart());
+        return "cart/index";
+    }
 
 }

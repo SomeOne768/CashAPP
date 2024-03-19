@@ -13,24 +13,14 @@ import app.repositories.ClientRepository;
 import app.repositories.ProductRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CartService {
     
 
     @Autowired
     MyUserDetailsService myUserDetailsService;
-
-    @Autowired
-    ClientRepository clientRepository;
-
-    @Autowired
-    CartItemRepository cartItemRepository;
-    
-    @Autowired
-    CartRepository cartRepository;
-
-    @Autowired
-    ProductRepository productRepository;
 
     @PersistenceContext
     EntityManager entityManager;
@@ -58,9 +48,6 @@ public class CartService {
         item.setCart(cart);
         item.setProduct(product);
         item.setQuantity(quantity);
-
-        // cartItemRepository.save(item);
-        // cartRepository.save(cart);
 
         entityManager.persist(item);
         entityManager.persist(cart);
