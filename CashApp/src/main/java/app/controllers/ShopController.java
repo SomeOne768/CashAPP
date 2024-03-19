@@ -36,6 +36,8 @@ public class ShopController {
     @Autowired
     private MyUserDetailsService userService;
 
+   
+
     // Permet de voir tous les produits disponible à l'achat
     @GetMapping(path = { "/shop" })
     public String index(Model model) {
@@ -43,6 +45,9 @@ public class ShopController {
         model.addAttribute("products", productRepository.findAll());
         return "shop";
     }
+
+    
+
 
     // Voir les détails d'un produit
     @GetMapping(path = { "/shop/{id}" })
