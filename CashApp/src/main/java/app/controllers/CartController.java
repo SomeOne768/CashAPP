@@ -36,11 +36,23 @@ public class CartController {
     }
 
     @PostMapping("/cart/add/{id}")
-    public ResponseEntity<String> index(@PathVariable("id") Long id) {
+    public ResponseEntity<String> add(@PathVariable("id") Long id) {
         Cart cart = cartService.getCart();
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
             cartService.addToCart(cart, product.get(), 1);
+            return ResponseEntity.ok("Product added to cart successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        }
+    }
+
+    @PostMapping("/cart/add/{id}")
+    public ResponseEntity<String> addQuantity(@PathVariable("id") Long id, @RequestParam("quantity") int quantity) {
+        Cart cart = cartService.getCart();
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            cartService.addToCart(cart, product.get(), quantity);
             return ResponseEntity.ok("Product added to cart successfully.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
