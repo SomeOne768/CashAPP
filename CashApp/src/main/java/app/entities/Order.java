@@ -31,18 +31,18 @@ public class Order implements Serializable{
     @Column(name="total")
     private double total;
 
-    @Column(name="done")
-    private boolean done;
-
     @Column(name="payment_method")
     private String paymentMethod;
+
+    //@OneToMany
+    @JoinColumn(name="OrderItem")
+    private OrderItem items;
 
     public Order(Client client, Date purchaseDate, double total, String paymentMethod) {
         this.client = client;
         this.purchaseDate = purchaseDate;
         this.total = total;
         this.paymentMethod = paymentMethod;
-        this.done = false;
     }
 
     public Order() {}

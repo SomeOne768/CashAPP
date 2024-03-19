@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 
@@ -29,6 +30,10 @@ public class Client{
 
     @Column(name="postcode")
     private int postcode;
+
+    //@OneToOne
+    @JoinColumn(name="cart")
+    private Cart cart;
     
     public Client(String firstname, String lastname, Date birthdate, int postcode) {
         this.firstname = firstname;

@@ -11,32 +11,32 @@ import jakarta.persistence.Id;
 
 @Entity
 @Table(name="purchases")
-public class Purchase {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="purchase_id")
-    private Long purchaseId;
+    @Column(name="id")
+    private Long orderItemId;
 
     //@ManyToOne
     @JoinColumn(name="order_")
     private Order order_;
 
     //@ManyToOne
-    @JoinColumn(name="product")
-    private Product product;
+    @JoinColumn(name="productName")
+    private String productName;
 
     @Column(name="quantity")
     private int quantity;
 
     @Column(name="unit_price")
-    private double unit_price;
+    private float unit_price;
 
-    protected Purchase() {}
+    protected OrderItem() {}
 
-    public Purchase(Order order, Product product, int quantity, double unit_price) {
+    public OrderItem(Order order, String productName, int quantity, float unit_price) {
         this.order_ = order;
-        this.product = product;
+        this.productName = productName;
         this.quantity = quantity;
         this.unit_price = unit_price;
     }
@@ -49,12 +49,12 @@ public class Purchase {
         this.order_ = orderToSet;
     }
 
-    public Product getProduct() {
-        return product;
+    public String getProduct() {
+        return productName;
     }
 
-    public void setProduct(Product productToSet) {
-        this.product = productToSet;
+    public void setProduct(String productName) {
+        this.productName = productName;
     }
 
     public int getQuantity() {
@@ -69,7 +69,7 @@ public class Purchase {
         return unit_price;
     }
 
-    public void setUnitPrice(double UnitPriceToSet) {
+    public void setUnitPrice(float UnitPriceToSet) {
         this.unit_price = UnitPriceToSet;
     }
 
