@@ -2,8 +2,9 @@ package app.repositories;
 
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
-import app.entities.Purchase;
+
+import app.entities.CartItem;
 
 
-public interface PurchaseRepository extends CrudRepository<Purchase, Long> {
+public interface CartItemRepository extends CrudRepository<CartItem, Long> {
 }
