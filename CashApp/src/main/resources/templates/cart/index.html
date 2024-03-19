@@ -25,6 +25,8 @@
             background-color: #f0f0f0;
             padding: 20px;
             margin-bottom: 20px;
+            min-height: 400px;
+            /* Définissez une hauteur minimale pour chaque carte */
         }
 
         .card img {
@@ -33,26 +35,30 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
+
+        .card-text {
+            height: 50px;
+            /* Ajustez la hauteur de la zone de texte pour limiter le contenu visible */
+            overflow: hidden;
+            /* Masquez le contenu qui dépasse */
+        }
     </style>
 </head>
 
 <body>
-    <h1 class="text-center mb-4">Ma liste de produit</h1>
+    <h1 class="text-center mb-4">Votre panier</h1>
 
     <div th:replace="fragments/logout-button.html"></div>
     <div class="container">
-        <div class="row">
-            <div th:each="item : ${cart.cartItems}" class="col-md-3">
-                <form th:action="'/shop/' + ${item.product.productId}" method="get">
-                    <div class="card d-flex flex-column h-100">
-                        <img th:src="'/images/' + ${item.product.imageUrl}" class="flex-fill" />
-                        <div class="flex-fill">
-                            <p th:text="${item.product.name}" class="mb-0"></p>
-                            <p th:text="${item.product.quantity}" class="mb-0"></p>
-                            <button type="submit" class="btn btn-primary btn-block mt-auto">Détail</button>
+        <div th:if="${cart.getItems() != null}" class="col justify-content-center">
+            <div th:each="item : ${cart.getItems()}" class="col-md-5">
+                    <div class="card d-flex flex-column">
+                        <img th:src="'/images/' + ${item.product.imageUrl}" class="card-img-top" />
+                        <div class="card-body">
+                            <p class="card-text" th:text="${item.product.name}"></p>
+                            <p class="card-text" th:text="${item.quantity}"></p>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>

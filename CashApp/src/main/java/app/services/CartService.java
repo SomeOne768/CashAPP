@@ -14,6 +14,7 @@ import app.repositories.ProductRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CartService {
@@ -32,6 +33,7 @@ public class CartService {
 
     }
 
+    @Transactional
     public void addToCart(Cart cart, Product product, int quantity)
     {
         
@@ -48,9 +50,11 @@ public class CartService {
         item.setCart(cart);
         item.setProduct(product);
         item.setQuantity(quantity);
+        cart.addItems(item);
 
         entityManager.persist(item);
         entityManager.persist(cart);
         entityManager.flush();
     }
+
 }
