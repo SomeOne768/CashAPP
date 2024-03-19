@@ -38,6 +38,13 @@ public class MyUserDetailsService implements UserDetailsService {
         return authentication.getName() == "admin";
     }
 
+    public boolean isLogged()
+    {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null;
+    }
+
     public Client getLoggedClient(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loggedUsername = authentication.getName();
