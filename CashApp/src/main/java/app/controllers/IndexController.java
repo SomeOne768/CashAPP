@@ -15,6 +15,8 @@ import app.entities.Product;
 import app.repositories.ProductRepository;
 import app.services.ProductService;
 import app.services.ClientService;
+import app.services.MyUserDetailsService;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -27,12 +29,15 @@ public class IndexController {
 	private ProductService productService;
 
 	@Autowired
+	private MyUserDetailsService userDetailService;
+
+	@Autowired
 	private ClientService clientService;
 
 	@GetMapping("/")
-	public String index(@RequestParam(required = false, defaultValue = "user") String username, @RequestParam(required = false, defaultValue = "") String productName, Model model) {
+	public String index(@RequestParam(required = false, defaultValue = "") String productName, Model model) {
 
-        model.addAttribute("client", clientService.findByFirstname(username));
+        model.addAttribute("client", userDetailService.getLoggedClient());
 		model.addAttribute("searchedProducts", productService.findProductsByName(productName));
         return "index"; // Nom de la vue Thymeleaf à afficher
     }
