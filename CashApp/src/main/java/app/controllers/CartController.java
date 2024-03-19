@@ -5,13 +5,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import app.repositories.ProductRepository;
 import app.services.CartService;
 import app.services.MyUserDetailsService;
 import app.services.ProductService;
-import app.entities.Product;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -31,10 +30,21 @@ public class CartController {
     ProductRepository productRepository;
 
     @GetMapping(path = { "/cart" })
-    public String index(Model model)
-    {
+    public String index(Model model) {
         model.addAttribute("cart", cartService.getCart());
         return "cart/index";
+    }
+
+    @PostMapping("/cart/add/{id}")
+    public ResponseEntity<String> index(@PathVariable("id") Long id) {
+        Cart cart = cartService.getCart();
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            cartService.addToCart(cart, product.get(), 1);
+            return ResponseEntity.ok("Product added to cart successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        }
     }
 
 }
