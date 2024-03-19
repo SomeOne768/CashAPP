@@ -37,7 +37,7 @@ public class CartService {
 
     public Cart getCart()
     {
-        Client c = myUserDetailsService.getClient();
+        Client c = myUserDetailsService.getLoggedClient();
         return c.getCart();
 
     }
