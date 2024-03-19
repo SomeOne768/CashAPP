@@ -34,9 +34,6 @@ public class CashAppApplication implements CommandLineRunner {
     private OrderRepository orderRepository;
 
     @Autowired
-    private PurchaseRepository purchaseRepository;
-
-    @Autowired
     private UserRepository userRepository;
 
     public static void main(String[] args) {
