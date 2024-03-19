@@ -8,14 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import app.repositories.ClientRepository;
 import app.repositories.UserRepository;
 import app.entities.User;
+import app.entities.Client;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
  
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
  
     @Override
     public UserDetails loadUserByUsername(String username) {
@@ -30,5 +36,13 @@ public class MyUserDetailsService implements UserDetailsService {
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName() == "admin";
+    }
+
+    public Client getLoggedClient(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedUsername = authentication.getName();
+
+        User loggedInUser = userRepository.findByUsername(loggedUsername);
+        return loggedInUser.getClient();
     }
 }
