@@ -3,18 +3,7 @@ package app.services;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
-
-import app.entities.Cart;
-import app.entities.CartItem;
-import app.entities.Client;
-import app.entities.OrderEntity;
-import app.entities.OrderItem;
-import app.entities.Product;
-import app.repositories.CartItemRepository;
-import app.repositories.CartRepository;
-import app.repositories.ClientRepository;
-import app.repositories.ProductRepository;
+import app.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;

@@ -5,16 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import app.entities.*;
 import org.springframework.stereotype.Service;
 import app.repositories.OrderEntityRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import app.entities.*;
-import app.repositories.OrderEntityRepository;
 import app.repositories.ProductRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -44,10 +38,17 @@ public class OrderService {
         Optional<OrderEntity> order = orderEntityRepository.findById(OrderId);
         if (product.isPresent() && order.isPresent()) {
             for (OrderItem item : order.get().getItems()) {
-                if (product.isPresent() || item.getQuantity() > quantity) {
+                if (item.getProductId() == productId) {
+                    quantity = (item.getQuantity() < quantity) ? item.getQuantity() : quantity;
+
                     product.get().setQuantity(item.getQuantity() - quantity);
                     item.setQuantity(item.getQuantity() - quantity);
 
+                    entityManager.persist(item);
+                    entityManager.persist(product);
+                    entityManager.flush();
+
+                    return;
                     // if(item.getQuantity() == 0)
                     // {
                     //     entityManager.remove(item);

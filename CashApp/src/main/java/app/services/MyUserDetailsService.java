@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import app.repositories.ClientRepository;
 import app.repositories.UserRepository;
 import app.entities.User;
 import app.entities.Client;
@@ -18,9 +17,6 @@ public class MyUserDetailsService implements UserDetailsService {
  
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private ClientRepository clientRepository;
 
  
     @Override

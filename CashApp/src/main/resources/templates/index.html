@@ -107,7 +107,6 @@
 
 
                     <div id="productsContainer" class="list-group">
-                        <!-- Les produits seront affichés ici -->
                     </div>
 
 
@@ -117,7 +116,6 @@
             <div class="col-md-6">
                 <div class="product-details">
                     <h4>Détail du produit</h4>
-                    <!-- Les détails du produit sélectionné s'afficheront ici -->
                 </div>
             </div>
             <div class="col-md-3">
@@ -145,11 +143,8 @@
 
     <script>
         var searchInput = document.getElementById("searchName");
-
-        // Récupérer le bouton de soumission du formulaire
         var submitButton = document.getElementById("submitBtn");
 
-        // Ajouter un écouteur d'événements 'input' au champ de recherche
         searchInput.addEventListener("input", function (event) {
             submitButton.click();
         });
@@ -210,16 +205,14 @@
                 detailButton.textContent = "Détail";
                 detailButton.classList.add("btn", "btn-primary", "btn-block", "mt-auto");
 
-                // Ajout de la propriété 'data-product-id' au bouton avec la valeur du productId
                 detailButton.dataset.productId = product.productId;
                 detailButton.addEventListener("click", function () {
-                    // Récupération du productId du produit associé au bouton
                     var productId = this.dataset.productId;
                     var selectedProduct = myProducts.find(product => product.productId == productId);
                     displayProductDetails(selectedProduct);
                 });
 
-                card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
+                card.appendChild(img);
                 card.appendChild(productName);
                 card.appendChild(detailButton);
 
@@ -230,7 +223,7 @@
 
         function displayProductDetails(product) {
             var productDetailsDiv = document.querySelector(".product-details");
-            productDetailsDiv.innerHTML = ""; // Supprimer le contenu précédent de la div
+            productDetailsDiv.innerHTML = ""; 
 
             var productName = document.createElement("h4");
             productName.textContent = product.name;
@@ -246,24 +239,21 @@
                 img.className = "flex-fill";
                 
 
-            // Ajout de classes Bootstrap pour une meilleure mise en forme
             productDetailsDiv.classList.add("card", "p-3", "mt-3");
 
             productName.classList.add("card-title");
             brand.classList.add("card-text");
             price.classList.add("card-text");
 
-            // Restriction de la taille de l'image en utilisant les classes Bootstrap
             img.classList.add("img-fluid", "rounded");
 
-            // Création d'une card pour afficher les détails du produit
             var card = document.createElement("div");
             card.classList.add("card");
 
             var cardBody = document.createElement("div");
             cardBody.classList.add("card-body");
 
-            // Ajout des éléments dans la card-body
+            
             cardBody.appendChild(productName);
             cardBody.appendChild(brand);
             cardBody.appendChild(price);
@@ -273,14 +263,12 @@
             addToCartButton.classList.add("btn", "btn-success", "mb-2");
             addToCartButton.addEventListener("click", function () {
                 var quantity = quantityInput.value;
-                // Ajoutez ici la logique pour ajouter le produit au panier avec la quantité spécifiée
                 console.log("Produit ajouté au panier:", product.name, "Quantité:", quantity);
             });
 
-            // Ajout d'un champ de quantité
             var quantityLabel = document.createElement("label");
             quantityLabel.textContent = "Quantité " + "(" + product.quantity + " en stock) :";
-            quantityLabel.classList.add("mr-2"); // Ajoutez une marge à droite pour l'alignement horizontal
+            quantityLabel.classList.add("mr-2"); 
 
             var quantityInput = document.createElement("input");
             quantityInput.type = "number";
@@ -288,13 +276,13 @@
             quantityInput.id = "quantity";
             quantityInput.min = 0;
             quantityInput.max = product.quantity;
-            quantityInput.value = 1; // Valeur par défaut
+            quantityInput.value = 1; 
             quantityInput.classList.add("form-control", "mb-2", "d-inline-block"); // Affichage en ligne
 
             var idInput = document.createElement("input");
-            idInput.type = "hidden"; // Utiliser idInput au lieu de quantityInput
-            idInput.name = "productId"; // Utiliser idInput au lieu de quantityInput
-            idInput.id = "productId"; // Utiliser idInput au lieu de quantityInput
+            idInput.type = "hidden"; 
+            idInput.name = "productId";
+            idInput.id = "productId";
             idInput.value = product.productId;
             idInput.classList.add("form-control", "mb-2", "d-inline-block"); // Affichage en ligne
 

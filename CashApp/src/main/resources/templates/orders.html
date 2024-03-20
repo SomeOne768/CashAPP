@@ -19,11 +19,10 @@
                     <th scope="col">Date d'achat</th>
                     <th scope="col">Total</th>
                     <th scope="col">Méthode de paiement</th>
-                    <th scope="col">Articles</th> <!-- Nouvelle colonne pour les articles -->
+                    <th scope="col">Articles</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Utilisation de Thymeleaf pour boucler sur les commandes -->
                 <tr th:each="order : ${orders}">
                     <td th:text="${order.orderId}"></td>
                     <td th:text="${order.clientId}"></td>
@@ -32,7 +31,6 @@
                     <td th:text="${order.paymentMethod}"></td>
                     <td>
                         <ul>
-                            <!-- Boucle sur les articles associés à la commande -->
                             <li th:each="item : ${order.getItems()}">
                                 <span th:text="${item.productId} + ' - ' + ${item.productName} + ' - ' + ${item.quantity} + ' x ' + ${item.unitPrice}"></span>
                             </li>

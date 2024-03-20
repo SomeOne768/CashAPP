@@ -1,19 +1,15 @@
 package app.entities;
 
-import java.io.Serializable;
 import java.util.*;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.CascadeType;
 
 @Entity

@@ -12,20 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
 
 import app.repositories.ProductRepository;
 import app.services.MyUserDetailsService;
-import app.services.ProductService;
 import app.entities.Product;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.*;
-
-import java.nio.file.Path;
-import java.nio.file.Files;
 
 @Controller
 public class ShopController {
@@ -45,8 +38,6 @@ public class ShopController {
         model.addAttribute("products", productRepository.findAll());
         return "shop";
     }
-
-    
 
 
     // Voir les détails d'un produit
