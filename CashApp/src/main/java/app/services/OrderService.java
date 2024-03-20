@@ -1,7 +1,6 @@
 package app.services;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import app.entities.*;
 import org.springframework.stereotype.Service;
@@ -21,6 +20,9 @@ public class OrderService {
     @Autowired 
     private OrderEntityRepository orderEntityRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     public void insertOrder(OrderEntity order){
         orderEntityRepository.save(order);
     }
@@ -28,21 +30,12 @@ public class OrderService {
     public List<OrderEntity> findOrdersByClientID(Long clientID) {
         return orderEntityRepository.findByClientId(clientID);
     }
-  
-  @Autowired
-    private OrderEntityRepository orderRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    public void insertOrder(OrderEntity order) {
-        orderRepository.save(order);
-    }
 
     @Transactional
     public void removeProduct(Long OrderId, Long productId, int quantity) {
         Optional<Product> product = productRepository.findById(productId);
-        Optional<OrderEntity> order = orderRepository.findById(OrderId);
+        Optional<OrderEntity> order = orderEntityRepository.findById(OrderId);
         if (product.isPresent() && order.isPresent()) {
             for (OrderItem item : order.get().getItems()) {
                 if (!product.isPresent() || item.getQuantity() > quantity) {
