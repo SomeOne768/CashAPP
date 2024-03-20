@@ -30,7 +30,6 @@ public class CartService {
     {
         Client c = myUserDetailsService.getLoggedClient();
         return c.getCart();
-
     }
 
     @Transactional

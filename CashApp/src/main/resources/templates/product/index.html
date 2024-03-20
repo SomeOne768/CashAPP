@@ -62,7 +62,7 @@
         <img class="img-fluid" th:src="'../images/' + ${product.imageUrl}" />
         <p><strong>Marque:</strong> <span th:text="${product.brand}"></span></p>
         <p><strong>Prix:</strong> <span th:text="${product.price} + '€'"></span></p>
-        <p><strong>Couleur:</strong> <span th:text="${product.color}"></span></p>
+        <p><strong>Quantity:</strong> <span th:text="${product.quantity}"></span></p>
         <a th:href="'/shop/edit/' + ${product.productId}" class="btn btn-primary btn-block"
             th:text="${@myUserDetailsService.isAdmin() ? 'Modifier' : 'Retour'}"></a>
         <form id="addToCartForm" th:action="@{/cart/add/{id}/quantity(id=${product.productId})}" method="post">

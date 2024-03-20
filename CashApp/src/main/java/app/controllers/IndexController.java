@@ -19,6 +19,7 @@ import app.repositories.ProductRepository;
 import app.services.ProductService;
 import app.services.ClientService;
 import app.services.MyUserDetailsService;
+import app.services.CartService;
 
 import org.springframework.ui.Model;
 
@@ -37,8 +38,12 @@ public class IndexController {
 	@Autowired
 	private ClientService clientService;
 
+	@Autowired
+	private CartService cartService;
+
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("cart", cartService.getCart());
 		return "index";
 	}
 
