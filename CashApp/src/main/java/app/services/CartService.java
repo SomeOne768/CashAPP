@@ -35,7 +35,7 @@ public class CartService {
     @Transactional
     public void addToCart(Cart cart, Product product, int quantity)
     {
-        
+        quantity = (product.getQuantity() < quantity) ? product.getQuantity(): quantity;
         for(CartItem item: cart.getItems())
         {
             if(item.getProduct() == product)
@@ -51,9 +51,40 @@ public class CartService {
         item.setQuantity(quantity);
         cart.addItems(item);
 
+        product.setQuantity(product.getQuantity() - quantity);
         entityManager.persist(item);
         entityManager.persist(cart);
+        entityManager.persist(product);
         entityManager.flush();
+    }
+
+    @Transactional
+    public void deleteFromCart(Cart cart, Product product, int quantity)
+    {
+        for(CartItem item: cart.getItems())
+        {
+            if(item.getProduct() == product)
+            {
+                quantity = (item.getQuantity() < quantity) ? item.getQuantity(): quantity;
+                item.setQuantity(quantity+item.getQuantity());
+                product.setQuantity(product.getQuantity() + quantity);
+
+                if(item.getQuantity() == 0)
+                {
+                    // retirer du panier
+                    cart.removeItems(item);
+                    entityManager.remove(item);
+                }
+                else {
+                    entityManager.persist(item);
+                }
+
+                entityManager.persist(cart);
+                entityManager.persist(product);
+                entityManager.flush();
+                return;
+            }
+        }
     }
 
 }
