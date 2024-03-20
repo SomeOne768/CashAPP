@@ -123,9 +123,15 @@
             <div class="col-md-3">
                 <div class="selected-products">
                     <h4>Articles sélectionnés</h4>
-                    <ul id="selectedItems" class="list-group">
-                        <!-- Les articles sélectionnés s'affichent ici -->
-                    </ul>
+                    <div th:if="${cart.getItems() != null}" class="col justify-content-center">
+                        <div th:each="item : ${cart.getItems()}" class="col-md-5">
+                            <img th:src="'/images/' + ${item.product.imageUrl}" class="card-img-top" />
+                            <p th:text="${item.product.name} + ' : ' + ${item.quantity}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${cart.getItems() == null}">
+                        <p class="text-center mb-4">Panier vide</p>
+                    </div>
                 </div>
                 <div class="payment-actions">
                     <button class="btn btn-custom btn-block">Payer</button>
@@ -212,8 +218,6 @@
                     displayProductDetails(selectedProduct);
                 });
 
-
-
                 // card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
                 card.appendChild(productName);
                 card.appendChild(detailButton);
@@ -236,9 +240,6 @@
             var price = document.createElement("p");
             price.textContent = "Prix: " + product.price + "€";
 
-            var color = document.createElement("p");
-            color.textContent = "Couleur: " + product.color;
-
             var image = document.createElement("img");
             image.src = "/images/" + product.imageUrl;
             image.alt = product.name;
@@ -249,7 +250,6 @@
             productName.classList.add("card-title");
             brand.classList.add("card-text");
             price.classList.add("card-text");
-            color.classList.add("card-text");
 
             // Restriction de la taille de l'image en utilisant les classes Bootstrap
             image.classList.add("img-fluid", "rounded");
@@ -265,9 +265,7 @@
             cardBody.appendChild(productName);
             cardBody.appendChild(brand);
             cardBody.appendChild(price);
-            cardBody.appendChild(color);
 
-            // Ajout d'un bouton "Ajouter au panier"
             var addToCartButton = document.createElement("button");
             addToCartButton.textContent = "Ajouter au panier";
             addToCartButton.classList.add("btn", "btn-success", "mb-2");
@@ -279,20 +277,35 @@
 
             // Ajout d'un champ de quantité
             var quantityLabel = document.createElement("label");
-            quantityLabel.textContent = "Quantité:";
+            quantityLabel.textContent = "Quantité " + "(" + product.quantity + " en stock) :";
             quantityLabel.classList.add("mr-2"); // Ajoutez une marge à droite pour l'alignement horizontal
 
             var quantityInput = document.createElement("input");
             quantityInput.type = "number";
+            quantityInput.name = "quantity";
+            quantityInput.id = "quantity";
             quantityInput.min = 0;
-            quantityInput.max = 100;
+            quantityInput.max = product.quantity;
             quantityInput.value = 1; // Valeur par défaut
             quantityInput.classList.add("form-control", "mb-2", "d-inline-block"); // Affichage en ligne
 
-            // Ajout des éléments dans la card-body
-            cardBody.appendChild(quantityLabel);
-            cardBody.appendChild(quantityInput);
-            cardBody.appendChild(addToCartButton);
+            var idInput = document.createElement("input");
+            idInput.type = "hidden"; // Utiliser idInput au lieu de quantityInput
+            idInput.name = "productId"; // Utiliser idInput au lieu de quantityInput
+            idInput.id = "productId"; // Utiliser idInput au lieu de quantityInput
+            idInput.value = product.productId;
+            idInput.classList.add("form-control", "mb-2", "d-inline-block"); // Affichage en ligne
+
+            var addToCartForm = document.createElement("form");
+            addToCartForm.action = "/addToCart/" + product.productId;
+            addToCartForm.method = "POST";
+
+            addToCartForm.appendChild(quantityLabel);
+            addToCartForm.appendChild(quantityInput);
+            addToCartForm.appendChild(idInput);
+            addToCartForm.appendChild(addToCartButton);
+
+            cardBody.appendChild(addToCartForm);
 
             card.appendChild(image);
             card.appendChild(cardBody);
