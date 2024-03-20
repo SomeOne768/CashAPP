@@ -64,6 +64,7 @@ public class CartService {
                 quantity = (item.getQuantity() < quantity) ? item.getQuantity() : quantity;
                 item.setQuantity(quantity + item.getQuantity());
                 product.setQuantity(product.getQuantity() + quantity);
+                
 
                 if (item.getQuantity() == 0) {
                     // retirer du panier
@@ -101,6 +102,7 @@ public class CartService {
             total += item.getQuantity() * product.getPrice();
 
             order.addItems(orderItem);
+            orderItem.setProductId(product.getProductId());
             entityManager.persist(orderItem);
             entityManager.remove(item);
         }

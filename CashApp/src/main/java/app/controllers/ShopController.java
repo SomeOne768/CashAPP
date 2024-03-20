@@ -115,17 +115,16 @@ public class ShopController {
 
     // Route pour enregistrer le produit créer avec son image associée
     @PostMapping("/shop/new")
-    public String create(@ModelAttribute Product product, @RequestParam("image") MultipartFile file) {
+    public String create(@ModelAttribute Product product, @RequestParam("imageF") MultipartFile file) {
         // Seul l'admin y a accès
         if(!userService.isAdmin())
             return "redirect:/shop";
 
         if (!file.isEmpty()) {
             try {
+                
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get("src/main/resources/static/images/" + product.getImageUrl());
-
-                Files.write(path, bytes);
+                product.setImage(Base64.getEncoder().encodeToString(bytes));
             } catch (IOException e) {
                 e.printStackTrace();
             }

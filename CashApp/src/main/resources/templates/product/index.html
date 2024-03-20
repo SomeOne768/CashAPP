@@ -59,7 +59,8 @@
     <h1 class="text-center mb-4" th:text="${product.name}"></h1>
 
     <div class="card">
-        <img class="img-fluid" th:src="'../images/' + ${product.imageUrl}" />
+        <img class="img-fluid" th:src="|data:image/jpeg;base64,${product.image}|" />
+                           
         <p><strong>Marque:</strong> <span th:text="${product.brand}"></span></p>
         <p><strong>Prix:</strong> <span th:text="${product.price} + '€'"></span></p>
         <p><strong>Quantité:</strong> <span th:text="${product.quantity}"></span></p>

@@ -53,7 +53,7 @@
         <div th:if="${cart.getItems() != null}" class="col justify-content-center">
             <div th:each="item : ${cart.getItems()}" class="col-md-5">
                     <div class="card d-flex flex-column">
-                        <img th:src="'/images/' + ${item.product.imageUrl}" class="card-img-top" />
+                        <img class="card-img-top" th:src="|data:image/jpeg;base64,${item.product.image}|" />
                         <div class="card-body">
                             <p class="card-text" th:text="${item.product.name}"></p>
                             <p class="card-text" th:text="${item.quantity}"></p>
@@ -64,6 +64,8 @@
         <div th:if="${cart.getItems() == null}" class="col-12">
             <p class="text-center mb-4">Panier vide</p>
         </div>
+
+        <a href="/cart/paye">Payer</a>
     </div>
 </body>
 

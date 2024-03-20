@@ -125,7 +125,7 @@
                     <h4>Articles sélectionnés</h4>
                     <div th:if="${cart.getItems() != null}" class="col justify-content-center">
                         <div th:each="item : ${cart.getItems()}" class="col-md-5">
-                            <img th:src="'/images/' + ${item.product.imageUrl}" class="card-img-top" />
+                            <img th:src="|data:image/jpeg;base64,${item.product.image}|" class="card-img-top" />
                             <p th:text="${item.product.name} + ' : ' + ${item.quantity}"></p>
                         </div>
                     </div>
@@ -200,7 +200,8 @@
                 card.classList.add("card", "d-flex", "flex-column", "h-100");
 
                 var img = document.createElement("img");
-                img.src = "/images/" + product.imageUrl;
+                img.src = "data:image/jpeg;base64," + product.image;
+                img.className = "flex-fill";
 
                 var productName = document.createElement("p");
                 productName.textContent = product.name;
@@ -218,7 +219,7 @@
                     displayProductDetails(selectedProduct);
                 });
 
-                // card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
+                card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
                 card.appendChild(productName);
                 card.appendChild(detailButton);
 
@@ -240,9 +241,10 @@
             var price = document.createElement("p");
             price.textContent = "Prix: " + product.price + "€";
 
-            var image = document.createElement("img");
-            image.src = "/images/" + product.imageUrl;
-            image.alt = product.name;
+            var img = document.createElement("img");
+                img.src = "data:image/jpeg;base64," + product.image;
+                img.className = "flex-fill";
+                
 
             // Ajout de classes Bootstrap pour une meilleure mise en forme
             productDetailsDiv.classList.add("card", "p-3", "mt-3");
@@ -252,7 +254,7 @@
             price.classList.add("card-text");
 
             // Restriction de la taille de l'image en utilisant les classes Bootstrap
-            image.classList.add("img-fluid", "rounded");
+            img.classList.add("img-fluid", "rounded");
 
             // Création d'une card pour afficher les détails du produit
             var card = document.createElement("div");
@@ -307,7 +309,7 @@
 
             cardBody.appendChild(addToCartForm);
 
-            card.appendChild(image);
+            card.appendChild(img);
             card.appendChild(cardBody);
 
             productDetailsDiv.appendChild(card);

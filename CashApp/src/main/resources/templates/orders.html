@@ -19,6 +19,7 @@
                     <th scope="col">Date d'achat</th>
                     <th scope="col">Total</th>
                     <th scope="col">Méthode de paiement</th>
+                    <th scope="col">Articles</th> <!-- Nouvelle colonne pour les articles -->
                 </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,14 @@
                     <td th:text="${#dates.format(order.purchaseDate, 'dd/MM/yyyy')}"></td>
                     <td th:text="${order.total}"></td>
                     <td th:text="${order.paymentMethod}"></td>
+                    <td>
+                        <ul>
+                            <!-- Boucle sur les articles associés à la commande -->
+                            <li th:each="item : ${order.getItems()}">
+                                <span th:text="${item.productId} + ' - ' + ${item.productName} + ' - ' + ${item.quantity} + ' x ' + ${item.unitPrice}"></span>
+                            </li>
+                        </ul>
+                    </td>
                 </tr>
                 </tbody>
             </table>

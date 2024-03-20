@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Entity
 @Table(name = "products")
@@ -22,8 +23,9 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "imageUrl")
-    private String imageUrl;
+    @Lob
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "brand")
     private String brand;
@@ -37,9 +39,9 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String name, String imageUrl, String brand, double price, int quantity) {
+    public Product(String name, String image, String brand, double price, int quantity) {
         this.name = name;
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.brand = brand;
         this.price = price;
         this.quantity = quantity;
@@ -85,11 +87,11 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 }
