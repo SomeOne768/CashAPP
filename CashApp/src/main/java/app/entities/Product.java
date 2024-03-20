@@ -31,18 +31,18 @@ public class Product implements Serializable {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "color")
-    private String color;
+    @Column(name = "quantity")
+    private int quantity;
 
     public Product() {
     }
 
-    public Product(String name, String imageUrl, String brand, double price, String color) {
+    public Product(String name, String imageUrl, String brand, double price, int quantity) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.brand = brand;
         this.price = price;
-        this.color = color;
+        this.quantity = quantity;
     }
 
     public Long getProductId() {
@@ -77,12 +77,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getColor() {
-        return color;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getImageUrl() {

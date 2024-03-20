@@ -69,10 +69,10 @@ public class CashAppApplication implements CommandLineRunner {
         List<String> list = Arrays.asList(strings);
 
         if (list.contains("install")) {
-            productRepository.save(new Product("Chemise", "chemise.jpeg", "Abidas", 10.32, "Noir"));
-            productRepository.save(new Product("fraise", "fraise.jpeg", "FiTounis", 4.14, "Rouge"));
-            productRepository.save(new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, "Noir"));
-            productRepository.save(new Product("pomme", "pomme.jpeg", "Golden", 1.32, "Verte"));
+            productRepository.save(new Product("Chemise", "chemise.jpeg", "Abidas", 10.32, 40));
+            productRepository.save(new Product("fraise", "fraise.jpeg", "FiTounis", 4.14, 73));
+            productRepository.save(new Product("pantalon", "pantalon.jpeg", "Celio", 15.65, 2));
+            productRepository.save(new Product("pomme", "pomme.jpeg", "Golden", 1.32, 91));
 
             User u1 = new User("admin", "admin");
             User u2 = new User("user", "user");

@@ -81,7 +81,7 @@ public class ShopController {
     @PostMapping("/shop/edit/{id}")
     public String updateProduct(@PathVariable("id") Long productId, @RequestParam String name,
             @RequestParam String brand, @RequestParam Double price,
-            @RequestParam String color) {
+            @RequestParam int quantity) {
 
         // Seul l'admin y a accès
         if (!userService.isAdmin())
@@ -95,7 +95,7 @@ public class ShopController {
         product.setName(name);
         product.setBrand(brand);
         product.setPrice(price);
-        product.setColor(color);
+        product.setQuantity(quantity);
 
         productRepository.save(product);
 
