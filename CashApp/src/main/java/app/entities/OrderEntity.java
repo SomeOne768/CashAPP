@@ -3,29 +3,20 @@ package app.entities;
 import java.io.Serializable;
 import java.util.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name="orders")
-public class Order implements Serializable{
+public class OrderEntity implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="order_id")
     private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name="client")
-    private Client client;
+    @Column(name="client_id")
+    private Long clientId;
 
     @Column(name="purchase_date")
     private Date purchaseDate;
@@ -37,31 +28,33 @@ public class Order implements Serializable{
     private String paymentMethod;
 
     @OneToMany(mappedBy = "order_", cascade = CascadeType.ALL)
-    private List<OrderItem> items;
+    private List<OrderItem> orderItems;
 
     public List<OrderItem> getItems()
     {
-        return items;
+        return orderItems;
     }
 
     public void setItems(List<OrderItem> items)
     {
-        this.items = items;
+        this.orderItems = items;
     }
 
     public void addItems(OrderItem item)
     {
-        this.items.add(item);
+        if(this.orderItems == null)
+            this.orderItems = new ArrayList<>();
+        this.orderItems.add(item);
     }
 
-    public Order(Client client, Date purchaseDate, double total, String paymentMethod) {
-        this.client = client;
+    public OrderEntity(Long clientId, Date purchaseDate, double total, String paymentMethod) {
+        this.clientId = clientId;
         this.purchaseDate = purchaseDate;
         this.total = total;
         this.paymentMethod = paymentMethod;
     }
 
-    public Order() {}
+    public OrderEntity() {}
 
     public Long getOrderId() {
         return orderId;
@@ -71,12 +64,12 @@ public class Order implements Serializable{
         this.orderId = orderId;
     }
 
-    public Client getClient() {
-        return client;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public Date getPurchaseDate() {

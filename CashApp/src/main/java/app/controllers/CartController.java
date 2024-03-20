@@ -47,4 +47,13 @@ public class CartController {
         }
     }
 
+    @GetMapping("/cart/paye")
+    public String paye()
+    {
+        Cart cart = cartService.getCart();
+        cartService.paye(cart);
+
+        return "redirect:/cart";
+    }
+
 }

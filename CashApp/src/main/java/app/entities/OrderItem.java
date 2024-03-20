@@ -18,9 +18,9 @@ public class OrderItem {
     @Column(name="orderItem_id")
     private Long orderItemId;
 
-    //@ManyToOne
+    @ManyToOne
     @JoinColumn(name="order_id")
-    private Order order_;
+    private OrderEntity order_;
 
     @Column(name="productName")
     private String productName;
@@ -29,22 +29,22 @@ public class OrderItem {
     private int quantity;
 
     @Column(name="unit_price")
-    private float unit_price;
+    private double unit_price;
 
     protected OrderItem() {}
 
-    public OrderItem(Order order, String productName, int quantity, float unit_price) {
+    public OrderItem(OrderEntity order, String productName, int quantity, double unit_price) {
         this.order_ = order;
         this.productName = productName;
         this.quantity = quantity;
         this.unit_price = unit_price;
     }
 
-    public Order getOrder() {
+    public OrderEntity getOrder() {
         return order_;
     }
 
-    public void setOrder(Order orderToSet) {
+    public void setOrder(OrderEntity orderToSet) {
         this.order_ = orderToSet;
     }
 
@@ -68,7 +68,7 @@ public class OrderItem {
         return unit_price;
     }
 
-    public void setUnitPrice(float UnitPriceToSet) {
+    public void setUnitPrice(double UnitPriceToSet) {
         this.unit_price = UnitPriceToSet;
     }
 

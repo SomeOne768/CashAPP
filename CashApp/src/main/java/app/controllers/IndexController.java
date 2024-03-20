@@ -57,7 +57,7 @@ public class IndexController {
 	@PostMapping("/search")
 	public ResponseEntity<?> search(@RequestParam(required = false) String searchName) {
 		ArrayList<Product> products = productService.findProductsByName(searchName);
-		
+
 		// return products;
 		if (products.size() == 0) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
@@ -67,10 +67,7 @@ public class IndexController {
 	}
 
 	@PostMapping("/addToCart/{id}")
-    public String addToCart(@PathVariable("id") Long id,
-		@RequestParam("quantity") int quantity,
-		@RequestParam("productId") int productId
-	) {
+    public String addToCart(@PathVariable("id") Long id, @RequestParam("quantity") int quantity, @RequestParam("productId") int productId) {
         Cart cart = cartService.getCart();
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent() || quantity > 0) {
@@ -81,3 +78,9 @@ public class IndexController {
     }
 
 }
+	
+		
+	
+	
+		
+	

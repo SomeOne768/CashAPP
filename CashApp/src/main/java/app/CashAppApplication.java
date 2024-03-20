@@ -13,10 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-
-import app.repositories.UserRepository;
-import app.entities.User;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -52,7 +48,7 @@ public class CashAppApplication implements CommandLineRunner {
     private ClientRepository clientRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderEntityRepository orderRepository;
 
     @Autowired
     private UserRepository userRepository;

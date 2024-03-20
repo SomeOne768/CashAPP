@@ -38,11 +38,18 @@ public class Cart {
     }
 
     public void addItems(CartItem items) {
+        if(this.cartItems == null)
+            this.cartItems = new ArrayList<CartItem>();
         this.cartItems.add(items);
     }
 
     public void removeItems(CartItem items) {
         this.cartItems.remove(items);
+    }
+
+    public void clearList()
+    {
+        this.cartItems.clear();
     }
 
 }
