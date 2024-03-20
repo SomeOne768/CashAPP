@@ -175,6 +175,7 @@
             container.innerHTML = "<p> Pas d'article</p>";
         }
 
+
         function displayProducts(products) {
             var container = document.getElementById("productsContainer");
             container.innerHTML = "";
@@ -190,8 +191,19 @@
                 productName.textContent = product.name;
 
                 var detailButton = document.createElement("button");
-                detailButton.textContent = "Détail" + product.productId;
+                detailButton.textContent = "Détail";
                 detailButton.classList.add("btn", "btn-primary", "btn-block", "mt-auto");
+
+                // Ajout de la propriété 'data-product-id' au bouton avec la valeur du productId
+                detailButton.dataset.productId = product.productId;
+                detailButton.addEventListener("click", function () {
+                    // Récupération du productId du produit associé au bouton
+                    var productId = this.dataset.productId;
+                    var selectedProduct = myProducts.find(product => product.productId == productId);
+                    displayProductDetails(selectedProduct);
+                });
+
+
 
                 // card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
                 card.appendChild(productName);
@@ -200,6 +212,85 @@
                 container.appendChild(card);
             });
         }
+
+
+        function displayProductDetails(product) {
+            var productDetailsDiv = document.querySelector(".product-details");
+            productDetailsDiv.innerHTML = ""; // Supprimer le contenu précédent de la div
+
+            var productName = document.createElement("h4");
+            productName.textContent = product.name;
+
+            var brand = document.createElement("p");
+            brand.textContent = "Marque: " + product.brand;
+
+            var price = document.createElement("p");
+            price.textContent = "Prix: " + product.price + "€";
+
+            var color = document.createElement("p");
+            color.textContent = "Couleur: " + product.color;
+
+            var image = document.createElement("img");
+            image.src = "/images/" + product.imageUrl;
+            image.alt = product.name;
+
+            // Ajout de classes Bootstrap pour une meilleure mise en forme
+            productDetailsDiv.classList.add("card", "p-3", "mt-3");
+
+            productName.classList.add("card-title");
+            brand.classList.add("card-text");
+            price.classList.add("card-text");
+            color.classList.add("card-text");
+
+            // Restriction de la taille de l'image en utilisant les classes Bootstrap
+            image.classList.add("img-fluid", "rounded");
+
+            // Création d'une card pour afficher les détails du produit
+            var card = document.createElement("div");
+            card.classList.add("card");
+
+            var cardBody = document.createElement("div");
+            cardBody.classList.add("card-body");
+
+            // Ajout des éléments dans la card-body
+            cardBody.appendChild(productName);
+            cardBody.appendChild(brand);
+            cardBody.appendChild(price);
+            cardBody.appendChild(color);
+
+            // Ajout d'un bouton "Ajouter au panier"
+            var addToCartButton = document.createElement("button");
+            addToCartButton.textContent = "Ajouter au panier";
+            addToCartButton.classList.add("btn", "btn-success", "mb-2");
+            addToCartButton.addEventListener("click", function () {
+                var quantity = quantityInput.value;
+                // Ajoutez ici la logique pour ajouter le produit au panier avec la quantité spécifiée
+                console.log("Produit ajouté au panier:", product.name, "Quantité:", quantity);
+            });
+
+            // Ajout d'un champ de quantité
+            var quantityLabel = document.createElement("label");
+            quantityLabel.textContent = "Quantité:";
+            quantityLabel.classList.add("mr-2"); // Ajoutez une marge à droite pour l'alignement horizontal
+
+            var quantityInput = document.createElement("input");
+            quantityInput.type = "number";
+            quantityInput.min = 0;
+            quantityInput.max = 100;
+            quantityInput.value = 1; // Valeur par défaut
+            quantityInput.classList.add("form-control", "mb-2", "d-inline-block"); // Affichage en ligne
+
+            // Ajout des éléments dans la card-body
+            cardBody.appendChild(quantityLabel);
+            cardBody.appendChild(quantityInput);
+            cardBody.appendChild(addToCartButton);
+
+            card.appendChild(image);
+            card.appendChild(cardBody);
+
+            productDetailsDiv.appendChild(card);
+        }
+
     </script>
 
 </body>
