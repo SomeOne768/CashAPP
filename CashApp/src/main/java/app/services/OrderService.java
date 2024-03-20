@@ -1,16 +1,24 @@
-// package app.services;
+package app.services;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import app.entities.*;
-// import app.repositories.OrderRepository;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import app.entities.*;
+import org.springframework.stereotype.Service;
+import app.repositories.OrderEntityRepository;
 
-// public class OrderService {
+@Service
+public class OrderService {
     
-//     @Autowired 
-//     private OrderRepository orderRepository;
+    @Autowired 
+    private OrderEntityRepository orderEntityRepository;
 
-//     public void insertOrder(Order order){
-//         orderRepository.save(order);
-//     }
+    public void insertOrder(OrderEntity order){
+        orderEntityRepository.save(order);
+    }
 
-// }
+    public List<OrderEntity> findOrdersByClientID(Long clientID) {
+        return orderEntityRepository.findByClientId(clientID);
+    }
+
+}
