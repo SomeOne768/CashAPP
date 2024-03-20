@@ -22,7 +22,7 @@ public class ProductService {
         ArrayList<Product> produitsFiltres = new ArrayList<>();
     
         for (Product product : products) {
-            if (product.getName().contains(name)) {
+            if (product.getName().toUpperCase().contains(name.toUpperCase())) {
                 produitsFiltres.add(product);
             }
         }
