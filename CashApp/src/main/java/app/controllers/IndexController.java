@@ -22,6 +22,7 @@ import app.services.MyUserDetailsService;
 import app.services.CartService;
 
 import org.springframework.ui.Model;
+import java.util.*;
 
 @Controller
 public class IndexController {
@@ -64,5 +65,19 @@ public class IndexController {
 			return ResponseEntity.ok(products);
 		}
 	}
+
+	@PostMapping("/addToCart/{id}")
+    public String addToCart(@PathVariable("id") Long id,
+		@RequestParam("quantity") int quantity,
+		@RequestParam("productId") int productId
+	) {
+        Cart cart = cartService.getCart();
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent() || quantity > 0) {
+			cartService.addToCart(cart, product.get(), quantity);
+        } 
+
+		return "redirect:/";
+    }
 
 }

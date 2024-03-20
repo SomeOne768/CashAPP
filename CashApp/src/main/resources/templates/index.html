@@ -266,7 +266,6 @@
             cardBody.appendChild(brand);
             cardBody.appendChild(price);
 
-            // Ajout d'un bouton "Ajouter au panier"
             var addToCartButton = document.createElement("button");
             addToCartButton.textContent = "Ajouter au panier";
             addToCartButton.classList.add("btn", "btn-success", "mb-2");
@@ -274,9 +273,6 @@
                 var quantity = quantityInput.value;
                 // Ajoutez ici la logique pour ajouter le produit au panier avec la quantité spécifiée
                 console.log("Produit ajouté au panier:", product.name, "Quantité:", quantity);
-
-
-
             });
 
             // Ajout d'un champ de quantité
@@ -286,15 +282,30 @@
 
             var quantityInput = document.createElement("input");
             quantityInput.type = "number";
+            quantityInput.name = "quantity";
+            quantityInput.id = "quantity";
             quantityInput.min = 0;
             quantityInput.max = product.quantity;
             quantityInput.value = 1; // Valeur par défaut
             quantityInput.classList.add("form-control", "mb-2", "d-inline-block"); // Affichage en ligne
 
-            // Ajout des éléments dans la card-body
-            cardBody.appendChild(quantityLabel);
-            cardBody.appendChild(quantityInput);
-            cardBody.appendChild(addToCartButton);
+            var idInput = document.createElement("input");
+            idInput.type = "hidden"; // Utiliser idInput au lieu de quantityInput
+            idInput.name = "productId"; // Utiliser idInput au lieu de quantityInput
+            idInput.id = "productId"; // Utiliser idInput au lieu de quantityInput
+            idInput.value = product.productId;
+            idInput.classList.add("form-control", "mb-2", "d-inline-block"); // Affichage en ligne
+
+            var addToCartForm = document.createElement("form");
+            addToCartForm.action = "/addToCart/" + product.productId;
+            addToCartForm.method = "POST";
+
+            addToCartForm.appendChild(quantityLabel);
+            addToCartForm.appendChild(quantityInput);
+            addToCartForm.appendChild(idInput);
+            addToCartForm.appendChild(addToCartButton);
+
+            cardBody.appendChild(addToCartForm);
 
             card.appendChild(image);
             card.appendChild(cardBody);
