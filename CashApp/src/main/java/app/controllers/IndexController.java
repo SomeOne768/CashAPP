@@ -3,6 +3,8 @@ package app.controllers;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import app.entities.Cart;
 import app.entities.Product;
 import app.repositories.ProductRepository;
 import app.services.ProductService;
@@ -35,16 +38,26 @@ public class IndexController {
 	private ClientService clientService;
 
 	@GetMapping("/")
-	public String index(@RequestParam(required = false, defaultValue = "") String productName, Model model) {
-
-        model.addAttribute("client", userDetailService.getLoggedClient());
-		model.addAttribute("searchedProducts", productService.findProductsByName(productName));
-        return "index"; // Nom de la vue Thymeleaf à afficher
-    }
+	public String index() {
+		return "index";
+	}
 
 	@GetMapping(path = { "/secu" })
 	public String secu() {
 
 		return "secu.html";
 	}
+
+	@PostMapping("/search")
+	public ArrayList<Product> search(@RequestParam(required = false) String searchName) {
+		ArrayList<Product> products = productService.findProductsByName(searchName);
+		
+		return products;
+		// if (products.size() == 0) {
+		// 	return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+		// } else {
+		// 	return ResponseEntity.ok(products);
+		// }
+	}
+
 }

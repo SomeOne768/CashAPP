@@ -27,7 +27,8 @@ public class WebSecurityConfig {
             //	.loginPage("/login") // If we want a custom login page
                 .permitAll()
             ) 
-            .logout((logout) -> logout.permitAll());
+            .logout((logout) -> logout.permitAll())
+            .cors(cors -> cors.disable());
 
         return http.build();
     } 
