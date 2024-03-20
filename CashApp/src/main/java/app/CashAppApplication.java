@@ -10,13 +10,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import app.repositories.UserRepository;
 import app.entities.User;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@ComponentScan
 @SpringBootApplication
 public class CashAppApplication implements CommandLineRunner {
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurer(){
+            @Override
+            public void addCorsMappings(CorsRegistry registry){
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localcost:8080")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+            }
+        };
+    }
 
     private static final Logger log = LoggerFactory.getLogger(
             CashAppApplication.class);
@@ -59,7 +80,7 @@ public class CashAppApplication implements CommandLineRunner {
             Client c2 = new Client("user", "user", null, 01000);
             u1.setClient(c1);
             u1.setClient(c2);
-            
+
             Cart cart1 = new Cart();
             Cart cart2 = new Cart();
             c1.setCart(cart1);
@@ -67,7 +88,7 @@ public class CashAppApplication implements CommandLineRunner {
 
             cartRepository.save(cart1);
             cartRepository.save(cart2);
-            
+
             clientRepository.save(c1);
             clientRepository.save(c2);
 

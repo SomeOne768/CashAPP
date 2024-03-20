@@ -155,12 +155,10 @@
                 }
                 console.log(response);
 
-                return response.json(); // Ajout de cette ligne pour parser la réponse JSON
-            })
-            .then(data => {
-                // displayProducts(data);
-                console.log("je veux  afficher");
-                console.log(data);
+                return response.json();
+
+            }).then(data => {
+                displayProducts(data);
             })
             .catch(error => {
                 console.error("Erreur lors de la recherche de produits :", error);

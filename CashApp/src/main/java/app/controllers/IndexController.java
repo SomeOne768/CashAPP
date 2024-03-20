@@ -49,15 +49,15 @@ public class IndexController {
 	}
 
 	@PostMapping("/search")
-	public ArrayList<Product> search(@RequestParam(required = false) String searchName) {
+	public ResponseEntity<?> search(@RequestParam(required = false) String searchName) {
 		ArrayList<Product> products = productService.findProductsByName(searchName);
 		
-		return products;
-		// if (products.size() == 0) {
-		// 	return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
-		// } else {
-		// 	return ResponseEntity.ok(products);
-		// }
+		// return products;
+		if (products.size() == 0) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+		} else {
+			return ResponseEntity.ok(products);
+		}
 	}
 
 }
