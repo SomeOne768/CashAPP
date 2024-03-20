@@ -51,11 +51,11 @@ public class CartController {
     public ResponseEntity<String> add(@PathVariable("id") Long id, @RequestParam("quantity") int quantity) {
         Cart cart = cartService.getCart();
         Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
+        if (!product.isPresent() || quantity < 1) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        } else {
             cartService.addToCart(cart, product.get(), quantity);
             return ResponseEntity.ok("Product added to cart successfully.");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
         }
     }
 
