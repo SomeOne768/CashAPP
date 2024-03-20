@@ -123,16 +123,15 @@
             <div class="col-md-3">
                 <div class="selected-products">
                     <h4>Articles sélectionnés</h4>
-                    <ul id="selectedItems" class="list-group">
-                        <!-- Utilisation de Thymeleaf pour boucler sur les éléments du panier -->
-                        <li th:each="item : ${cart.items}" class="list-group-item">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span th:text="${item.productName}"></span>
-                                <span th:text="${item.quantity}"></span>
-                                <span th:text="${'€' + item.unitPrice}"></span>
-                            </div>
-                        </li>
-                    </ul>
+                    <div th:if="${cart.getItems() != null}" class="col justify-content-center">
+                        <div th:each="item : ${cart.getItems()}" class="col-md-5">
+                            <img th:src="'/images/' + ${item.product.imageUrl}" class="card-img-top" />
+                            <p th:text="${item.product.name} + ' : ' + ${item.quantity}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${cart.getItems() == null}">
+                        <p class="text-center mb-4">Panier vide</p>
+                    </div>
                 </div>
                 <div class="payment-actions">
                     <button class="btn btn-custom btn-block">Payer</button>

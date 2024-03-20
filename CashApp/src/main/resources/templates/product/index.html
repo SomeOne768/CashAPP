@@ -65,7 +65,7 @@
         <p><strong>Quantity:</strong> <span th:text="${product.quantity}"></span></p>
         <a th:href="'/shop/edit/' + ${product.productId}" class="btn btn-primary btn-block"
             th:text="${@myUserDetailsService.isAdmin() ? 'Modifier' : 'Retour'}"></a>
-        <form id="addToCartForm" th:action="@{/cart/add/{id}/quantity(id=${product.productId})}" method="post">
+        <form id="addToCartForm" th:action="@{/cart/add/{id}(id=${product.productId})}" method="post">
             <input type="number" id="quantity" name="quantity" value="1">
             <button type="submit">Ajouter au panier</button>
         </form>
