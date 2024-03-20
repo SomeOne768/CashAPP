@@ -1,6 +1,6 @@
 package app.services;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import app.entities.*;
@@ -28,5 +28,13 @@ public class ProductService {
         }
     
         return produitsFiltres;
+    }
+
+    public void returnProduct(Long productId, int quantity) {
+        Optional<Product> product = productRepository.findById(productId);
+        if (product.isPresent()) {
+            product.get().setQuantity(product.get().getQuantity() + quantity);
+        }
+
     }
 }
