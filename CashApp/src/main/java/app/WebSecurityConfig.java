@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +28,9 @@ public class WebSecurityConfig {
             //	.loginPage("/login") // If we want a custom login page
                 .permitAll()
             ) 
-            .logout((logout) -> logout.permitAll());
+            .logout((logout) -> logout.permitAll())
+            .cors(cors -> cors.disable())
+            .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     } 

@@ -99,23 +99,19 @@
                 <div class="product-list">
                     <h4>Liste des produits</h4>
 
-                    <form th:action="@{/}" method="get">
-                        <input type="text" id="searchInput" name="productName" class="form-control" placeholder="Rechercher un produit...">
+                    <form id="searchForm" action="/search" method="POST">
+                        <input type="text" id="searchName" name="searchName" class="form-control"
+                            placeholder="Rechercher un produit..." value="che">
                         <button type="submit">Rechercher</button>
                     </form>
 
+
                     <div id="productsContainer" class="list-group">
-                        <!-- Pour le moment, pour simuler on les recuepre au chargemernt de la page -->
-                        <div th:each="p : ${searchedProducts}">
-                            <div class="card d-flex flex-column h-100">
-                                <img th:src="'/images/' + ${p.imageUrl}" />
-                                <div>
-                                    <p th:text="${p.name}" class="mb-0"></p>
-                                    <button type="submit" class="btn btn-primary btn-block mt-auto">Détail</button>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Les produits seront affichés ici -->
                     </div>
+
+
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -140,7 +136,61 @@
     </div>
 
     <div th:replace="fragments/logout-button.html"></div>
+
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function (event) {
+            event.preventDefault();
     
+            var formData = new FormData(this);
+    
+            fetch(this.action, {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("OK");
+                } else {
+                    console.error("Erreur lors de la recherche de produits :", response.status);
+                }
+                console.log(response);
+
+                return response.json();
+
+            }).then(data => {
+                displayProducts(data);
+            })
+            .catch(error => {
+                console.error("Erreur lors de la recherche de produits :", error);
+            });
+        });
+    
+        function displayProducts(products) {
+            var container = document.getElementById("productsContainer");
+            container.innerHTML = "";
+    
+            products.forEach(product => {
+                var card = document.createElement("div");
+                card.classList.add("card", "d-flex", "flex-column", "h-100");
+    
+                // var img = document.createElement("img");
+                // img.src = "/images/" + product.imageUrl;
+    
+                var productName = document.createElement("p");
+                productName.textContent = product.name;
+    
+                var detailButton = document.createElement("button");
+                detailButton.textContent = "Détail";
+                detailButton.classList.add("btn", "btn-primary", "btn-block", "mt-auto");
+    
+                // card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
+                card.appendChild(productName);
+                card.appendChild(detailButton);
+    
+                container.appendChild(card);
+            });
+        }
+    </script>    
 
 </body>
 
