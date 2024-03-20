@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des commandes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Liste des commandes</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID de la commande</th>
+                    <th scope="col">ID du client</th>
+                    <th scope="col">Date d'achat</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Méthode de paiement</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Utilisation de Thymeleaf pour boucler sur les commandes -->
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderId}"></td>
+                    <td th:text="${order.clientId}"></td>
+                    <td th:text="${#dates.format(order.purchaseDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${order.total}"></td>
+                    <td th:text="${order.paymentMethod}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
