@@ -28,6 +28,9 @@ public class OrderItem {
     @Column(name="quantity")
     private int quantity;
 
+    @Column(name = "product_id")
+    private Long productId;
+
     @Column(name="unit_price")
     private double unit_price;
 
@@ -72,5 +75,12 @@ public class OrderItem {
         this.unit_price = UnitPriceToSet;
     }
 
-}
+    public Long getProductId() {
+        return productId;
+    }
 
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+}
