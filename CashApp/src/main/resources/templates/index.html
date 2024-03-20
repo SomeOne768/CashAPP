@@ -138,6 +138,8 @@
     <div th:replace="fragments/logout-button.html"></div>
 
     <script>
+
+        let myProducts;
         document.getElementById("searchForm").addEventListener("submit", function (event) {
             event.preventDefault();
     
@@ -158,13 +160,15 @@
                 return response.json();
 
             }).then(data => {
+                myProducts = data;
                 displayProducts(data);
             })
             .catch(error => {
                 console.error("Erreur lors de la recherche de produits :", error);
             });
         });
-    
+        
+
         function displayProducts(products) {
             var container = document.getElementById("productsContainer");
             container.innerHTML = "";
@@ -173,14 +177,14 @@
                 var card = document.createElement("div");
                 card.classList.add("card", "d-flex", "flex-column", "h-100");
     
-                // var img = document.createElement("img");
-                // img.src = "/images/" + product.imageUrl;
+                var img = document.createElement("img");
+                img.src = "/images/" + product.imageUrl;
     
                 var productName = document.createElement("p");
                 productName.textContent = product.name;
     
                 var detailButton = document.createElement("button");
-                detailButton.textContent = "Détail";
+                detailButton.textContent = "Détail" + product.productId;
                 detailButton.classList.add("btn", "btn-primary", "btn-block", "mt-auto");
     
                 // card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
