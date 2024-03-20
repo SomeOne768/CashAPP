@@ -164,9 +164,16 @@
                     displayProducts(data);
                 })
                 .catch(error => {
-                    console.error("Erreur lors de la recherche de produits :", error);
+                    displayProductsError();
+                    console.log("Erreur lors de la recherche de produits :", error);
                 });
         });
+
+
+        function displayProductsError() {
+            var container = document.getElementById("productsContainer");
+            container.innerHTML = "<p> Pas d'article</p>";
+        }
 
 
         function displayProducts(products) {
@@ -195,6 +202,7 @@
                     var selectedProduct = myProducts.find(product => product.productId == productId);
                     displayProductDetails(selectedProduct);
                 });
+
 
 
                 // card.appendChild(img); // Vous devez commenter cette ligne car img n'est pas défini
