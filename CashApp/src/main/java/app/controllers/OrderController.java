@@ -49,16 +49,18 @@ public class OrderController {
     // // Traiter le retour de produit
     // @PostMapping("/product/return/{id}")
     // public String processReturn(@PathVariable("id") Long id,
-    // @RequestParam("quantity") int quantity) {
-    // productService.returnProduct(id, quantity);
-    // return "/product/return";
+    //         @RequestParam("quantity") int quantity) {
+    //     productService.returnProduct(id, quantity);
+    //     return "/product/return";
     // }
 
     @PostMapping("/order/{id}/return")
     public String removefromOrder(@PathVariable("id") Long id, @RequestParam("productId") Long id2,
             @RequestParam("quantity") int quantity) {
+
+        productService.returnProduct(id2, quantity);
         orderService.removeProduct(id, id2, quantity);
-        
+
         return "redirect:/cart";
     }
 }
